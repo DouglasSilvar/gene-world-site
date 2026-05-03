@@ -1,0 +1,1118 @@
+/* Gene World — tema inspirado na UI do jogo */
+:root {
+  --bg-earth: #3d2918;
+  --panel: #2b1d11;
+  --panel-alt: #1a120c;
+  --gold: #ffd700;
+  --gold-dim: #c9a227;
+  --text: #f5f0e6;
+  --text-muted: #b8a98f;
+  --accent-green: #3d8c40;
+  --accent-blue: #3a6ea5;
+  --accent-red: #c0392b;
+  --border-ui: 2px solid var(--gold);
+  --radius: 4px;
+  --shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.45);
+  /* Sprites — maiores no mobile/desktop */
+  --sprite-biome: clamp(88px, min(38vw, 34vh), 148px);
+  --sprite-strip: clamp(72px, 28vw, 120px);
+  --sprite-totem: clamp(56px, 22vw, 96px);
+  --sprite-weapon: clamp(64px, 26vw, 112px);
+  --sprite-mat: clamp(64px, 28vw, 104px);
+  --sprite-npc: clamp(72px, 24vw, 112px);
+  --sprite-world: clamp(72px, 22vw, 112px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0)
+    env(safe-area-inset-left, 0);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 215, 0, 0.06), transparent),
+    linear-gradient(180deg, #1f1510 0%, var(--bg-earth) 35%, #2a1f14 100%);
+  background-attachment: fixed;
+}
+
+.pixel-title,
+.panel-tag,
+.stat-label,
+.social-label {
+  font-family: "Press Start 2P", monospace;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 0.75rem 1rem;
+  background: var(--gold);
+  color: #1a120c;
+  z-index: 100;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(26, 18, 12, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: var(--border-ui);
+  box-shadow: var(--shadow-panel);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.65rem max(1rem, env(safe-area-inset-left)) 0.65rem max(1rem, env(safe-area-inset-right));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--gold);
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.brand-text .pixel-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.2rem;
+  line-height: 1.4;
+}
+
+.brand-text .subtitle {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.nav-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.nav-main a {
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.38rem, 2.8vw, 0.45rem);
+  padding: 0.55rem 0.7rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
+  text-decoration: none;
+  border: 2px solid #555;
+  background: linear-gradient(180deg, #3a322a, #2a241c);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.nav-main a:hover,
+.nav-main a:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  outline: none;
+}
+
+/* Hero */
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 2rem;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 880px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+    align-items: center;
+  }
+}
+
+.hero-copy h1.pixel-title {
+  font-size: clamp(0.85rem, 2.5vw, 1.15rem);
+  color: var(--gold);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+  text-shadow: 2px 2px 0 #1a120c;
+}
+
+.lead {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 0 0 1rem;
+  max-width: 52ch;
+}
+
+.lead strong {
+  color: var(--gold-dim);
+}
+
+.hero-art {
+  border: var(--border-ui);
+  border-radius: var(--radius);
+  background: var(--panel);
+  padding: 0.5rem;
+  box-shadow: var(--shadow-panel);
+}
+
+.hero-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  image-rendering: pixelated;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.btn {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.5rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 3px solid #fff;
+  background: linear-gradient(180deg, #4a4540, #2f2c28);
+  color: #fff;
+  transition: transform 0.12s, border-color 0.12s;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  outline: none;
+}
+
+.btn--gold {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, #5c4a28, #3d3018);
+  color: var(--gold);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+/* Section shell */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 max(1rem, env(safe-area-inset-left)) 4rem max(1rem, env(safe-area-inset-right));
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.35);
+}
+
+.section-head h2.pixel-title {
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.panel-tag {
+  font-size: 0.45rem;
+  padding: 0.35rem 0.5rem;
+  background: var(--panel-alt);
+  border: 2px solid var(--gold-dim);
+  color: var(--gold);
+  border-radius: var(--radius);
+}
+
+/* Manual grid — cards tipo “janela do jogo” (sempre até 2 colunas) */
+.manual-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .manual-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.window-panel {
+  background: var(--panel);
+  border: var(--border-ui);
+  border-radius: var(--radius);
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: var(--shadow-panel);
+  position: relative;
+  overflow: hidden;
+}
+
+.window-panel::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.window-panel h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  color: var(--gold);
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.55rem;
+  line-height: 1.5;
+}
+
+.window-panel p {
+  margin: 0 0 0.65rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.window-panel p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tiers: 1 coluna no telefone estreito; 2 colunas + terceiro em linha própria */
+.tier-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+@media (min-width: 520px) {
+  .tier-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tier-row .hotbar-slot:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: min(100%, 380px);
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+.hotbar-slot--boss {
+  border-color: rgba(231, 76, 60, 0.65);
+  box-shadow: inset 0 0 0 1px rgba(192, 57, 43, 0.25);
+}
+
+.enemy-boss-showcase {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.enemy-boss-showcase .hotbar-slot {
+  min-width: min(100%, 280px);
+}
+
+/* Boss tier 4 na grelha dos biomas — sprite ~2× para ver bem o pixel art */
+.manual-boss-preview .enemy-boss-showcase .hotbar-slot {
+  min-width: min(100%, 360px);
+  padding: 1rem 1rem 1.15rem;
+  gap: 0.55rem;
+}
+
+.manual-boss-preview .enemy-boss-showcase .sprite-slot-img {
+  width: clamp(176px, min(76vw, 68vh), 296px);
+  height: clamp(176px, min(76vw, 68vh), 296px);
+}
+
+.manual-boss-preview .enemy-boss-showcase .tier {
+  font-size: clamp(0.34rem, 3vw, 0.42rem);
+}
+
+.manual-boss-preview .enemy-boss-showcase .enemy-name {
+  font-size: clamp(0.88rem, 4vw, 1.05rem);
+}
+
+.sprite-pixel {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  object-fit: contain;
+}
+
+.hotbar-slot {
+  min-height: 0;
+  border: 2px solid var(--gold-dim);
+  background: var(--panel-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.65rem 0.45rem;
+  gap: 0.45rem;
+  text-align: center;
+  color: var(--text);
+}
+
+.hotbar-slot .tier {
+  font-family: "Press Start 2P", monospace;
+  color: var(--gold);
+  font-size: clamp(0.28rem, 2.5vw, 0.34rem);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.hotbar-slot .sprite-slot-img {
+  width: var(--sprite-biome);
+  height: var(--sprite-biome);
+  flex-shrink: 0;
+}
+
+.hotbar-slot .enemy-name {
+  font-family: system-ui, sans-serif;
+  font-size: clamp(0.78rem, 3.5vw, 0.95rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.sprite-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: flex-end;
+  margin-top: 0.75rem;
+}
+
+.sprite-strip figcaption {
+  font-size: clamp(0.72rem, 3vw, 0.82rem);
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 0.35rem;
+  max-width: 10rem;
+  line-height: 1.25;
+}
+
+.sprite-strip figure {
+  margin: 0;
+  text-align: center;
+}
+
+.sprite-strip .sprite-slot-img {
+  width: var(--sprite-strip);
+  height: var(--sprite-strip);
+  display: block;
+  margin: 0 auto;
+}
+
+.sprite-strip--lg .sprite-slot-img {
+  width: var(--sprite-strip);
+  height: var(--sprite-strip);
+}
+
+/* Inimigos voadores — criatura + totem (grade 2 colunas no mobile+) */
+.totem-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 520px) {
+  .totem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .totem-grid .totem-pair:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: min(100%, 420px);
+    justify-self: center;
+  }
+}
+
+.totem-pair {
+  border: 2px solid var(--gold-dim);
+  background: var(--panel-alt);
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--radius);
+}
+
+.totem-pair .totem-duo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.65rem;
+}
+
+.totem-pair .sprite-creature {
+  width: var(--sprite-strip);
+  height: var(--sprite-strip);
+}
+
+.totem-pair .sprite-totem-icon {
+  width: var(--sprite-totem);
+  height: var(--sprite-totem);
+}
+
+.totem-pair .totem-label {
+  margin: 0.55rem 0 0;
+  font-size: clamp(0.78rem, 3.2vw, 0.88rem);
+  color: var(--text);
+  font-weight: 600;
+  text-align: center;
+}
+
+.totem-pair .totem-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.72rem;
+  color: var(--gold-dim);
+  text-align: center;
+}
+
+.goblin-box {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 2px solid rgba(192, 57, 43, 0.65);
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.goblin-box img {
+  width: var(--sprite-strip);
+  height: var(--sprite-strip);
+  margin: 0 auto 0.5rem;
+  display: block;
+}
+
+.goblin-box p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.dark-types {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+
+@media (min-width: 480px) {
+  .dark-types {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dark-types figure:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 200px;
+  }
+}
+
+.dark-types figure {
+  margin: 0;
+  text-align: center;
+}
+
+.dark-types img {
+  width: clamp(72px, 28vw, 120px);
+  height: clamp(72px, 28vw, 120px);
+}
+
+.dark-types figcaption {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  line-height: 1.35;
+}
+
+.note-box {
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.65rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-left: 3px solid var(--accent-blue);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Attributes — bar visual */
+.attr-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+@media (min-width: 600px) {
+  .attr-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.attr-item {
+  background: var(--panel);
+  border: var(--border-ui);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+}
+
+.stat-label {
+  font-size: 0.42rem;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+
+.stat-bar {
+  height: 10px;
+  background: #1a120c;
+  border: 1px solid #444;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.stat-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #8b2942, #e74c3c);
+  opacity: 0.85;
+}
+
+.attr-item:nth-child(2) .stat-bar i {
+  background: linear-gradient(90deg, #1e5f8a, #3498db);
+}
+.attr-item:nth-child(3) .stat-bar i {
+  background: linear-gradient(90deg, #b8860b, #f39c12);
+}
+.attr-item:nth-child(4) .stat-bar i {
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+.attr-item:nth-child(5) .stat-bar i {
+  background: linear-gradient(90deg, #7f8c8d, #bdc3c7);
+}
+.attr-item:nth-child(6) .stat-bar i {
+  background: linear-gradient(90deg, #6c3483, #9b59b6);
+}
+
+.attr-desc {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Weapon columns */
+.weapon-columns {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .weapon-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .weapon-card:nth-child(3) {
+    grid-column: 1 / -1;
+    max-width: min(100%, 560px);
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+.weapon-card {
+  background: var(--panel);
+  border: var(--border-ui);
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+.weapon-card h3 {
+  margin: 0 0 0.5rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.5rem;
+  color: var(--gold);
+  line-height: 1.5;
+}
+
+.weapon-card .pair {
+  font-size: 0.88rem;
+  color: var(--accent-green);
+  margin-bottom: 0.5rem;
+}
+
+.skills-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.weapon-kit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  margin: 0.65rem 0 0.5rem;
+}
+
+.weapon-kit-row img {
+  width: var(--sprite-weapon);
+  height: var(--sprite-weapon);
+  border: 2px solid rgba(255, 215, 0, 0.35);
+  background: var(--panel-alt);
+  padding: 6px;
+  border-radius: 2px;
+}
+
+.armour-sample {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(255, 215, 0, 0.25);
+}
+
+.armour-sample h4 {
+  margin: 0 0 0.5rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.42rem;
+  color: var(--gold-dim);
+}
+
+.sword-skills-sample {
+  margin-top: 1rem;
+}
+
+.sword-skills-sample h4 {
+  margin: 0 0 0.45rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.42rem;
+  color: var(--gold-dim);
+}
+
+.skill-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.skill-icon-row img {
+  width: clamp(48px, 22vw, 80px);
+  height: clamp(48px, 22vw, 80px);
+  border: 2px solid var(--gold-dim);
+  background: #120d09;
+  padding: 4px;
+}
+
+.skill-icon-row .skill-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 140px;
+}
+
+/* Materials grid — duas colunas */
+.materials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.mat-cell {
+  border: 2px solid var(--gold-dim);
+  background: var(--panel-alt);
+  padding: 0.5rem 0.4rem 0.55rem;
+  text-align: center;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.36rem;
+  line-height: 1.35;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mat-cell .mat-sprite {
+  width: var(--sprite-mat);
+  height: var(--sprite-mat);
+}
+
+.mat-cell .mat-title {
+  margin: 0;
+}
+
+.mat-cell small {
+  display: block;
+  margin-top: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.mat-cell--note small {
+  font-style: italic;
+}
+
+.mat-cell--danger {
+  border-color: rgba(231, 76, 60, 0.85);
+  box-shadow: inset 0 0 0 1px rgba(192, 57, 43, 0.35);
+}
+
+.mat-cell--danger .mat-title {
+  color: #e74c3c;
+}
+
+.potion-grid .mat-cell small strong {
+  color: #e5989b;
+}
+
+.potion-grid .mat-cell small {
+  font-size: clamp(0.68rem, 3.2vw, 0.82rem);
+  line-height: 1.45;
+  hyphens: auto;
+}
+
+/* NPC list */
+.npc-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.npc-card {
+  display: grid;
+  gap: 0.5rem;
+  background: var(--panel);
+  border: var(--border-ui);
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+@media (min-width: 640px) {
+  .npc-card {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+  }
+}
+
+.npc-icon {
+  width: var(--sprite-npc);
+  height: var(--sprite-npc);
+  border: 2px solid var(--gold);
+  background: var(--panel-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.55rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.npc-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+}
+
+.world-thumb {
+  float: right;
+  margin: 0 0 0.35rem 0.65rem;
+  width: var(--sprite-world);
+  height: var(--sprite-world);
+  border: 2px solid var(--gold-dim);
+  background: var(--panel-alt);
+  padding: 4px;
+}
+
+.window-panel .world-thumb {
+  float: none;
+  margin: 0 auto 0.65rem;
+  display: block;
+}
+
+.window-panel--split {
+  display: grid;
+  gap: 0.65rem;
+}
+
+@media (min-width: 520px) {
+  .window-panel--split {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+  }
+
+  .window-panel--split .world-thumb {
+    margin: 0;
+  }
+}
+
+.npc-card h3 {
+  margin: 0;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.52rem;
+  color: var(--gold);
+  line-height: 1.45;
+}
+
+.npc-card p {
+  margin: 0;
+  grid-column: 1 / -1;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 640px) {
+  .npc-card p {
+    grid-column: 2;
+  }
+}
+
+.npc-card a {
+  color: var(--gold-dim);
+  text-underline-offset: 3px;
+}
+
+.npc-card a:hover,
+.npc-card a:focus-visible {
+  color: var(--gold);
+  outline: none;
+}
+
+/* Two column narrative */
+.split-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .split-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.andarilhos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+
+@media (min-width: 520px) {
+  .andarilhos-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .andarilhos-grid figure:nth-child(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 220px;
+  }
+}
+
+.andarilhos-grid figure {
+  margin: 0;
+  text-align: center;
+  border: 2px solid var(--gold-dim);
+  background: var(--panel-alt);
+  padding: 0.65rem;
+  border-radius: var(--radius);
+}
+
+.andarilhos-grid img {
+  width: var(--sprite-npc);
+  height: var(--sprite-npc);
+  display: block;
+  margin: 0 auto;
+}
+
+.andarilhos-grid figcaption {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+/* Social */
+.social-strip {
+  background: var(--panel);
+  border: var(--border-ui);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-panel);
+}
+
+.social-strip h2.pixel-title {
+  font-size: 0.65rem;
+  color: var(--gold);
+  margin: 0 0 0.25rem;
+}
+
+.social-handle {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  color: var(--gold-dim);
+}
+
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+@media (min-width: 560px) {
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.social-links a {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.42rem;
+  padding: 0.65rem 0.85rem;
+  min-height: 48px;
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid #888;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #444, #2a2a2a);
+  transition: border-color 0.15s, color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 559px) {
+  .social-links a {
+    width: 100%;
+  }
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  outline: none;
+}
+
+.social-links a.instagram {
+  border-color: #c13584;
+}
+.social-links a.tiktok {
+  border-color: #69c9d0;
+}
+.social-links a.reddit {
+  border-color: #ff4500;
+}
+.social-links a.youtube {
+  border-color: #ff0000;
+}
+
+/* Footer */
+.site-footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem max(1.25rem, env(safe-area-inset-left)) 2rem max(1.25rem, env(safe-area-inset-right));
+  border-top: 2px solid rgba(255, 215, 0, 0.25);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.site-footer .pixel-title {
+  font-size: 0.45rem;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+
+/* Roadmap / future */
+.future-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.future-list li {
+  margin-bottom: 0.4rem;
+}
+
+.close-x {
+  float: right;
+  width: 22px;
+  height: 22px;
+  background: var(--accent-red);
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 0.65rem;
+  line-height: 18px;
+  text-align: center;
+  margin: -0.25rem -0.25rem 0 0;
+  border-radius: 2px;
+  user-select: none;
+}

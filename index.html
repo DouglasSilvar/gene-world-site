@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gene World — RPG 2D com mapa procedural, 9 biomas e sistemas de armas, crafting e NPCs com IA.">
+  <title>Gene World — RPG 2D procedural</title>
+  <link rel="icon" href="icon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#topo">
+        <img class="brand-mark" src="gene.png" alt="" width="44" height="44">
+        <div class="brand-text">
+          <p class="pixel-title">GENE WORLD</p>
+          <p class="subtitle">RPG 2D • Mapa procedural</p>
+        </div>
+      </a>
+      <nav class="nav-main" aria-label="Principal">
+        <a href="#manual">Manual</a>
+        <a href="#biomas">Biomas</a>
+        <a href="#atributos">Atributos</a>
+        <a href="#armas">Armas</a>
+        <a href="#materiais">Materiais</a>
+        <a href="#pocoes">Poções</a>
+        <a href="#npcs">NPCs</a>
+        <a href="#mundo">Mundo</a>
+        <a href="#redes">Redes</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="topo" class="hero">
+    <div class="hero-copy">
+      <h1 class="pixel-title">Gene World Game</h1>
+      <p class="lead">
+        <strong>RPG 2D em mundo aberto</strong> com mapa procedural, nove biomas distintos e progressão baseada em
+        <strong>atributos</strong> — sem classes fixas: o seu estilo de jogo vem das <strong>armas</strong> que você empunha e dos pontos que investe a cada nível.
+      </p>
+      <p class="lead">
+        Explore, negocie com NPCs guiados por LLM, complete missões, abra baús e portais com chaves dos biomas,
+        enfrente inimigos em tiers e prepare-se para masmorras sombrias e o caminho rumo ao <strong>portal do infinito</strong>.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn--gold" href="#manual">Abrir manual</a>
+        <a class="btn btn--ghost" href="#redes">Seguir @geneworldgame</a>
+      </div>
+    </div>
+    <figure class="hero-art">
+      <img src="gene.png" alt="Arte pixel art de Gene World" width="640" height="640">
+    </figure>
+  </section>
+
+  <main id="conteudo">
+    <section id="manual" class="section" aria-labelledby="manual-title">
+      <div class="section-head">
+        <h2 id="manual-title" class="pixel-title">Manual do jogador</h2>
+        <span class="panel-tag">UI inspirada no jogo</span>
+      </div>
+      <div class="window-panel" style="margin-bottom:1rem;">
+        <h3>Visão geral</h3>
+        <p>
+          Você começa perto do bioma da <strong>Terra</strong>, onde os inimigos mais comuns aparecem com mais frequência.
+          Ao explorar o mapa você encontra NPCs, baús, fontes de cura e portais — todos podem virar <strong>pontos de viagem</strong> que consomem mana.
+          Inimigos <strong>tier 2</strong> dropam fragmentos usados pelo ferreiro para evoluir equipamentos.
+        </p>
+        <p>
+          A cada <strong>nível</strong>, o jogador ganha <strong>10 pontos</strong> para distribuir livremente entre os seis atributos.
+          Skills das armas desbloqueiam quando você investe nos atributos ligados a cada tipo de arma.
+        </p>
+      </div>
+    </section>
+
+    <section id="biomas" class="section" aria-labelledby="biomas-title">
+      <div class="section-head">
+        <h2 id="biomas-title" class="pixel-title">Os nove biomas</h2>
+        <span class="panel-tag">Inimigos por tier</span>
+      </div>
+      <p style="color:var(--text-muted); margin-top:-0.5rem;">
+        Cada cartão usa <strong>duas colunas</strong> para os tiers no desktop (no celular, pilha em uma coluna para caber sprites grandes).
+        As fichas de <strong>água</strong>, <strong>lama</strong>, <strong>pedra</strong> e <strong>lava</strong> seguem a ordem correta de tiers que você passou.
+      </p>
+      <div class="manual-grid">
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Terra</h3>
+          <p>O bioma inicial e mais comum ao redor do spawn. Ótimo para aprender combate e farm de chaves.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/BolotaDirtSprite.png" alt="">
+              <p class="enemy-name">Bolota</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/ArborideoDirtSprite.png" alt="">
+              <p class="enemy-name">Arborídeo</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/OlhosTresDirtSprite.png" alt="">
+              <p class="enemy-name">Olhos</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Grama</h3>
+          <p>Faixa verde com fauna própria e materiais alinhados ao tema.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/GraminhaGrassSprite.png" alt="">
+              <p class="enemy-name">Graminha</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/GatinhoGrassSprite.png" alt="">
+              <p class="enemy-name">Gatinho</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/BodeGrassSprite.png" alt="">
+              <p class="enemy-name">Bode</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Areia</h3>
+          <p>Deserto com solaris e criaturas reptilianas; chaves da areia abrem baús compatíveis com a distância percorrida.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/SolarisSandSprite.png" alt="">
+              <p class="enemy-name">Solaris</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/DinoSandSprite.png" alt="">
+              <p class="enemy-name">Dino</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/AnubisSandSprite.png" alt="">
+              <p class="enemy-name">Anúbis</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Neve</h3>
+          <p>Bioma gelado com inimigos peculiares e loot temático.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/CarrotSnowSprite.png" alt="">
+              <p class="enemy-name">Carrot</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/YetSnowSprite.png" alt="">
+              <p class="enemy-name">Yet</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/PeGrandeSnowSprite.png" alt="">
+              <p class="enemy-name">Pé grande</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Campos místicos</h3>
+          <p>Área mágica — fauna com tema fantástico (sprite do tier 3 nomeado “Leon” no site; arquivo exportado como lion).</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/GnomoMagicFieldSprite.png" alt="">
+              <p class="enemy-name">Gnomo</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/DragonMagicFieldSprite.png" alt="">
+              <p class="enemy-name">Dragonito</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/LionMagicFieldSprite.png" alt="">
+              <p class="enemy-name">Leon</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Água</h3>
+          <p>Rios e zonas úmidas — criaturas rápidas no líquido.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/SardinhaWaterSprite.png" alt="">
+              <p class="enemy-name">Sardinha</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/PiranhaWaterSprite.png" alt="">
+              <p class="enemy-name">Piranha</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/JiboiaWaterSprite.png" alt="">
+              <p class="enemy-name">Jiboia</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Lama</h3>
+          <p>Pântano espesso — linha de peixes e crustáceos travados no pântano.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/CascudoMudSprite.png" alt="">
+              <p class="enemy-name">Cascudo</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/BagreMudSprite.png" alt="">
+              <p class="enemy-name">Bagre</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/XibataMudSprite.png" alt="">
+              <p class="enemy-name">Xibata</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Pedra</h3>
+          <p>Bioma rochoso — não confundir com o material de crafting “pedra”.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/PedradaRockSprite.png" alt="">
+              <p class="enemy-name">Pedrada</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/TartaRockSprite.png" alt="">
+              <p class="enemy-name">Tarta</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/RastumaRockSprite.png" alt="">
+              <p class="enemy-name">Rastuma</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Lava</h3>
+          <p>Zona vulcânica — criaturas escaladas ao calor extremo.</p>
+          <div class="tier-row">
+            <div class="hotbar-slot">
+              <span class="tier">T1</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/EspinhaLavaSprite.png" alt="">
+              <p class="enemy-name">Espinha</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T2</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/DragonildoLavaSprite.png" alt="">
+              <p class="enemy-name">Dragonildo</p>
+            </div>
+            <div class="hotbar-slot">
+              <span class="tier">T3</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/SkullTataLavaSprite.png" alt="">
+              <p class="enemy-name">Skull Tata</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="window-panel manual-boss-preview">
+          <span class="close-x" aria-hidden="true">×</span>
+          <h3>Boss tier 4</h3>
+          <p>
+            Chefes das masmorras <strong>Dark</strong> — tier acima da fauna comum dos biomas; lutas mais duras e loot correspondente.
+          </p>
+          <div class="enemy-boss-showcase">
+            <div class="hotbar-slot hotbar-slot--boss">
+              <span class="tier">T4</span>
+              <img class="sprite-pixel sprite-slot-img" src="spritepngoutput/DirtBossSprite.png" alt="">
+              <p class="enemy-name">Boss</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="window-panel" style="margin-top:1rem;">
+        <h3>Inimigos globais</h3>
+        <p>
+          <strong>Criaturas voadoras</strong> — corvo, águia, borboleta, coruja e <strong>morcego</strong> — aparecem em qualquer bioma,
+          tendem a fugir e não duelam como os demais inimigos. Cada uma dropa o seu <strong>totem</strong>; ao consumir,
+          você é guiado ao NPC, baú, portal ou fonte mais próxima.
+        </p>
+        <div class="totem-grid">
+          <div class="totem-pair">
+            <div class="totem-duo">
+              <img class="sprite-pixel sprite-creature" src="spritepngoutput/CorvoSprite.png" alt="">
+              <img class="sprite-pixel sprite-totem-icon" src="spritepngoutput/CorvoTotem.png" alt="">
+            </div>
+            <p class="totem-label">Corvo</p>
+            <p class="totem-sub">→ CorvoTotem</p>
+          </div>
+          <div class="totem-pair">
+            <div class="totem-duo">
+              <img class="sprite-pixel sprite-creature" src="spritepngoutput/AguiaSprite.png" alt="">
+              <img class="sprite-pixel sprite-totem-icon" src="spritepngoutput/AguiaTotem.png" alt="">
+            </div>
+            <p class="totem-label">Águia</p>
+            <p class="totem-sub">→ AguiaTotem</p>
+          </div>
+          <div class="totem-pair">
+            <div class="totem-duo">
+              <img class="sprite-pixel sprite-creature" src="spritepngoutput/BorboletaSprite.png" alt="">
+              <img class="sprite-pixel sprite-totem-icon" src="spritepngoutput/BorboletaTotem.png" alt="">
+            </div>
+            <p class="totem-label">Borboleta</p>
+            <p class="totem-sub">→ BorboletaTotem</p>
+          </div>
+          <div class="totem-pair">
+            <div class="totem-duo">
+              <img class="sprite-pixel sprite-creature" src="spritepngoutput/CorujaSprite.png" alt="">
+              <img class="sprite-pixel sprite-totem-icon" src="spritepngoutput/CorujaTotem.png" alt="">
+            </div>
+            <p class="totem-label">Coruja</p>
+            <p class="totem-sub">→ CorujaTotem</p>
+          </div>
+          <div class="totem-pair">
+            <div class="totem-duo">
+              <img class="sprite-pixel sprite-creature" src="spritepngoutput/MorcegoSprite.png" alt="">
+              <img class="sprite-pixel sprite-totem-icon" src="spritepngoutput/MorcegoTotem.png" alt="">
+            </div>
+            <p class="totem-label">Morcego</p>
+            <p class="totem-sub">→ MorcegoTotem</p>
+          </div>
+        </div>
+        <div class="goblin-box">
+          <img class="sprite-pixel" src="spritepngoutput/GoblinBatedorSprite.png" alt="">
+          <p>
+            <strong>Goblin batedor</strong> — aparece em <strong>bandos de três</strong> em qualquer bioma. São agressivos e rápidos;
+            ao contrário dos voadores, <strong>não dropam totens</strong>, mas soltam <strong>mais moedas</strong> que a média dos outros inimigos.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="atributos" class="section" aria-labelledby="attr-title">
+      <div class="section-head">
+        <h2 id="attr-title" class="pixel-title">Seis atributos</h2>
+        <span class="panel-tag">Sem classes — só build</span>
+      </div>
+      <div class="attr-grid">
+        <div class="attr-item">
+          <span class="stat-label">Força</span>
+          <div class="stat-bar"><i></i></div>
+          <p class="attr-desc">Escala dano e progressão ligada à <strong>espada</strong> e ao uso do escudo.</p>
+        </div>
+        <div class="attr-item">
+          <span class="stat-label">Velocidade</span>
+          <div class="stat-bar"><i></i></div>
+          <p class="attr-desc">Deslocamento e ritmo de exploração pelo mundo procedural.</p>
+        </div>
+        <div class="attr-item">
+          <span class="stat-label">Agilidade</span>
+          <div class="stat-bar"><i></i></div>
+          <p class="attr-desc">Sistema do <strong>arco e flecha</strong> e da <strong>aljava</strong>; desbloqueia skills do arco.</p>
+        </div>
+        <div class="attr-item">
+          <span class="stat-label">Vitalidade</span>
+          <div class="stat-bar"><i></i></div>
+          <p class="attr-desc">Reserva de vida e sobrevivência em combates longos.</p>
+        </div>
+        <div class="attr-item">
+          <span class="stat-label">Defesa</span>
+          <div class="stat-bar"><i></i></div>
+          <p class="attr-desc">Mitigação de golpes — sinergiza com equipamentos pesados e ritmo melee.</p>
+        </div>
+        <div class="attr-item">
+          <span class="stat-label">Magia</span>
+          <div class="stat-bar"><i></i></div>
+          <p class="attr-desc">Poder do <strong>cajado</strong> e do <strong>livro mágico</strong>; desbloqueia skills do cajado.</p>
+        </div>
+      </div>
+      <p style="margin-top:1rem; color:var(--text-muted); font-size:0.92rem;">
+        Cada arma tem <strong>5 habilidades</strong> que se abrem conforme você investe pontos no atributo correspondente:
+        força para espada, agilidade para arco, magia para cajado.
+      </p>
+    </section>
+
+    <section id="armas" class="section" aria-labelledby="armas-title">
+      <div class="section-head">
+        <h2 id="armas-title" class="pixel-title">Armas e equipamento secundário</h2>
+        <span class="panel-tag">3 kits • tier madeira</span>
+      </div>
+      <p style="color:var(--text-muted); margin:-0.35rem 0 1rem;">
+        Ilustração mínima: apenas os ícones de <strong>madeira</strong> para cada kit (o jogo tem a mesma linha em todos os materiais).
+      </p>
+      <div class="weapon-columns">
+        <div class="weapon-card">
+          <h3>Espada + Escudo</h3>
+          <div class="weapon-kit-row">
+            <img class="sprite-pixel" src="spritepngoutput/WoodSword.png" alt="" title="Espada de madeira">
+            <img class="sprite-pixel" src="spritepngoutput/WoodShield.png" alt="" title="Escudo de madeira">
+          </div>
+          <p class="pair">Par melee clássico • Skills ligadas à <strong>força</strong></p>
+          <ul class="skills-list">
+            <li>Cinco skills progressivas na linha da espada</li>
+            <li>Escudo complementa sobrevivência no frontline</li>
+          </ul>
+        </div>
+        <div class="weapon-card">
+          <h3>Arco + Aljava</h3>
+          <div class="weapon-kit-row">
+            <img class="sprite-pixel" src="spritepngoutput/WoodBow.png" alt="" title="Arco de madeira">
+            <img class="sprite-pixel" src="spritepngoutput/WoodQuiver.png" alt="" title="Aljava de madeira">
+          </div>
+          <p class="pair">Dano à distância • Skills ligadas à <strong>agilidade</strong></p>
+          <ul class="skills-list">
+            <li>Cinco skills progressivas na linha do arco</li>
+            <li>Aljava como peça de kit obrigatória do arqueiro</li>
+          </ul>
+        </div>
+        <div class="weapon-card">
+          <h3>Cajado + Livro</h3>
+          <div class="weapon-kit-row">
+            <img class="sprite-pixel" src="spritepngoutput/WoodStaff.png" alt="" title="Cajado de madeira">
+            <img class="sprite-pixel" src="spritepngoutput/WoodBook.png" alt="" title="Livro de madeira">
+          </div>
+          <p class="pair">Magias • Skills ligadas à <strong>magia</strong></p>
+          <ul class="skills-list">
+            <li>Cinco skills progressivas na linha do cajado</li>
+            <li>Livro mágico amplifica o conjurador</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="window-panel armour-sample">
+        <h4>Armaduras (exemplo básico)</h4>
+        <p style="margin:0 0 0.65rem; font-size:0.9rem; color:var(--text-muted);">
+          Peças de aparência variam por material; aqui só o conjunto inicial em madeira para não poluir a página.
+        </p>
+        <div class="weapon-kit-row">
+          <img class="sprite-pixel" src="spritepngoutput/WoodHelmet.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/WoodArmour.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/WoodBoots.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/WoodGloves.png" alt="">
+        </div>
+      </div>
+
+      <div class="window-panel sword-skills-sample">
+        <h4>Skills da espada (ícones)</h4>
+        <div class="skill-icon-row">
+          <img class="sprite-pixel" src="spritepngoutput/SwordTier1SkillSprite.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/SwordTier2SkillSprite.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/SwordTier3SkillSprite.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/SwordTierASkillSprite.png" alt="">
+          <img class="sprite-pixel" src="spritepngoutput/SwordTierBSkillSprite.png" alt="">
+          <span class="skill-hint">Somente a linha da espada como amostra — arco e cajado seguem o mesmo padrão de 5 skills.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="materiais" class="section" aria-labelledby="mat-title">
+      <div class="section-head">
+        <h2 id="mat-title" class="pixel-title">Doze materiais de item</h2>
+        <span class="panel-tag">Progressão de tier visual</span>
+      </div>
+      <p style="color:var(--text-muted); margin-bottom:1rem;">
+        Cada material altera o visual de todas as categorias de item. Na grade, <strong>espadas</strong> ilustram quase todos os tiers;
+        para <strong>couro</strong> usamos o <strong>capacete</strong> (não há espada de couro no jogo). Para <strong>galaxy</strong> segue o ícone geral do pacote.
+      </p>
+      <div class="materials-grid" role="list">
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/LeatherHelmet.png" alt="">
+          <span class="mat-title">Couro</span>
+          <small>Capacete de couro</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/WoodSword.png" alt="">
+          <span class="mat-title">Madeira</span>
+          <small>Início de campanha</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/RockSword.png" alt="">
+          <span class="mat-title">Pedra</span>
+          <small>Rock / mineral bruto</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/IronSword.png" alt="">
+          <span class="mat-title">Ferro</span>
+          <small>Primeira forja forte</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/SilverSword.png" alt="">
+          <span class="mat-title">Prata</span>
+          <small>Refino</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/GoldSword.png" alt="">
+          <span class="mat-title">Ouro</span>
+          <small>Brilho nobre</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/RubySword.png" alt="">
+          <span class="mat-title">Ruby</span>
+          <small>Gema vermelha</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/SapphireSword.png" alt="">
+          <span class="mat-title">Safira</span>
+          <small>Gema azul</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/CrystalSword.png" alt="">
+          <span class="mat-title">Cristal</span>
+          <small>Pureza mágica</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/MoonSword.png" alt="">
+          <span class="mat-title">Lua</span>
+          <small>Astral</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/SunSword.png" alt="">
+          <span class="mat-title">Sol</span>
+          <small>Radiante</small>
+        </div>
+        <div class="mat-cell mat-cell--note" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/Galaxy.png" alt="">
+          <span class="mat-title">Galaxy</span>
+          <small>Ícone galaxy — sem espada dedicada no pacote</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="pocoes" class="section" aria-labelledby="pocoes-title">
+      <div class="section-head">
+        <h2 id="pocoes-title" class="pixel-title">Poções</h2>
+        <span class="panel-tag">Consumíveis</span>
+      </div>
+      <div class="window-panel" style="margin-bottom:1rem;">
+        <h3>Como entram no jogo</h3>
+        <p style="margin-bottom:0;">
+          O <strong>Robiati</strong> aceita <strong>qualquer tipo de drop</strong> como ingrediente. Se <strong>enfurecer</strong>, pode entregar uma
+          <strong>poção de veneno</strong> de propósito (efeito descrito abaixo). O <strong>Ronaldo Mercador</strong> também vende poções e totens.
+        </p>
+      </div>
+      <div class="materials-grid potion-grid" role="list">
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/IncreaseHPPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Vida</span>
+          <small>Restaura 40% do HP maximo.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/IncreaseManaPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Mana</span>
+          <small>Restaura 40% da Mana maxima.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/StrengthPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Força</span>
+          <small>+20% Forca por 60s. Aumenta dano fisico.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/AgilityPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Agilidade</span>
+          <small>+20% Agilidade por 60s. Reduz cooldowns.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/VitalityPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Vitalidade</span>
+          <small>+20% Vitalidade por 60s. Aumenta HP maximo.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/DefensePotionSprite.png" alt="">
+          <span class="mat-title">Poção de Defesa</span>
+          <small>+20% Defesa por 60s. Reduz dano recebido.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/SpeedPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Velocidade</span>
+          <small>+20% Velocidade por 60s. Aumenta rapidez de movimento.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/MagicPotionSprite.png" alt="">
+          <span class="mat-title">Poção Mágica</span>
+          <small>+20% Magia por 60s. Aumenta dano magico.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/RevivePotionSprite.png" alt="">
+          <span class="mat-title">Poção de Reviver</span>
+          <small>Revive com 100% HP ao morrer. Dura 60s.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/ImmortalPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Imortalidade</span>
+          <small>Imortalidade total por 60s. Dano recebido = 0.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/ImpermeabilityPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Impermeabilidade</span>
+          <small>Impede reducao de velocidade em liquidos por 60s.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/CorruptPotionSprite.png" alt="">
+          <span class="mat-title">Poção Corrompida</span>
+          <small>Congela o tempo das outras poções por 3 minutos. Poções rápidas viram 100% durante o efeito.</small>
+        </div>
+        <div class="mat-cell mat-cell--danger" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/PoisonPotionSprite.png" alt="">
+          <span class="mat-title">Poção de Veneno</span>
+          <small>Remove 50% do HP atual. Cuidado!</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="npcs" class="section" aria-labelledby="npcs-title">
+      <div class="section-head">
+        <h2 id="npcs-title" class="pixel-title">NPCs principais e LLMs</h2>
+        <span class="panel-tag">Fixos + andarilhos</span>
+      </div>
+      <p style="color:var(--text-muted); margin:-0.35rem 0 1rem; font-size:0.92rem;">
+        <strong>Gogarion</strong>, <strong>Quintino</strong> e <strong>Robiati</strong> são encontros fixos do early game.
+        <strong>Ronaldo</strong>, <strong>Correia</strong> e <strong>Lidi Naga Fada</strong> são <strong>andarilhos</strong> (aparecem ao explorar).
+      </p>
+      <div class="npc-list">
+        <article class="npc-card">
+          <div class="npc-icon"><img class="sprite-pixel" src="spritepngoutput/TutorialNPC.png" alt=""></div>
+          <div>
+            <h3>Gogarion — mercador principal</h3>
+            <p>
+              Oferece <strong>uma espada, um arco com flechas ou um cajado</strong> conforme a conversa e o estado da economia do jogador.
+              Possui <strong>três missões</strong>; ao completá-las você ganha ouro e desbloqueia, em sequência, <strong>escudo</strong>,
+              <strong>aljava</strong> e <strong>livro mágico</strong> — fechando os três kits de combate.
+            </p>
+          </div>
+        </article>
+        <article class="npc-card">
+          <div class="npc-icon"><img class="sprite-pixel" src="spritepngoutput/QuintinoFerreiroNPC.png" alt=""></div>
+          <div>
+            <h3>Quintino — ferreiro</h3>
+            <p>
+              Une <strong>fragmentos</strong> dropados por inimigos <strong>tier 2</strong> aos itens equipáveis para elevar o nível das peças.
+              Centro da progressão de gear entre biomas.
+            </p>
+          </div>
+        </article>
+        <article class="npc-card">
+          <div class="npc-icon"><img class="sprite-pixel" src="spritepngoutput/RobiatiAlquimistaNPC.png" alt=""></div>
+          <div>
+            <h3>Robiati — alquimista</h3>
+            <p>
+              Aceita <strong>qualquer drop</strong> para sintetizar poções — lista visual na aba <a href="#pocoes">Poções</a>.
+              Cuidado: se ficar enfurecido, entrega uma <strong>poção de veneno</strong>
+              (<strong>Remove 50% do HP atual</strong>, conforme o item no jogo).
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="split-grid" style="margin-top:1rem;">
+        <div class="window-panel">
+          <h3>NPCs aleatórios por bioma</h3>
+          <p>Cada um carrega uma história, <strong>três quests</strong> e uma loja com itens aleatórios — sempre alinhados ao clima do bioma onde aparecem.</p>
+          <div class="sprite-strip" aria-hidden="true">
+            <figure><img class="sprite-pixel sprite-slot-img" src="spritepngoutput/NPCManDirt1.png" alt=""><figcaption>Variação</figcaption></figure>
+            <figure><img class="sprite-pixel sprite-slot-img" src="spritepngoutput/NPCManGrass1.png" alt=""><figcaption>Grama</figcaption></figure>
+            <figure><img class="sprite-pixel sprite-slot-img" src="spritepngoutput/NPCManSand1.png" alt=""><figcaption>Areia</figcaption></figure>
+          </div>
+        </div>
+        <div class="window-panel">
+          <h3>Andarilhos</h3>
+          <p>
+            NPCs <strong>ambulantes</strong> — não ficam fixos no mapa. Encontrou, conversou, negociou.
+          </p>
+          <div class="andarilhos-grid">
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/NPCRonaldoMercador.png" alt="">
+              <figcaption><strong>Ronaldo Mercador</strong> — equipáveis, poções, chaves e totens.</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/CorreiaDuendeNPC.png" alt="">
+              <figcaption><strong>Correia, o duende</strong> — ofertas próprias no procedural.</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/LidiNagaFadaNPC.png" alt="">
+              <figcaption><strong>Lidi Naga Fada</strong> — você paga o valor que quiser; o LLM escolhe um buff adequado por <strong>3 minutos</strong>.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mundo" class="section" aria-labelledby="mundo-title">
+      <div class="section-head">
+        <h2 id="mundo-title" class="pixel-title">O que você encontra no mapa</h2>
+        <span class="panel-tag">Exploração</span>
+      </div>
+      <div class="manual-grid">
+        <article class="window-panel window-panel--split">
+          <img class="sprite-pixel world-thumb" src="spritepngoutput/DirtChest.png" alt="">
+          <div>
+            <h3>Baús (T1–T3)</h3>
+            <p>Exigem <strong>chave do bioma</strong> correspondente (baú da areia → chave da areia). Loot compatível com a distância percorrida no mapa, mais ouro.</p>
+          </div>
+        </article>
+        <article class="window-panel">
+          <h3>Fontes de cura</h3>
+          <p>Octógonos com <strong>água rosada</strong> que restauram vida e mana após o banho ritual. <em>(Sem sprite dedicado neste export — só descrição.)</em></p>
+        </article>
+        <article class="window-panel window-panel--split">
+          <img class="sprite-pixel world-thumb" src="spritepngoutput/DirtTopPillar.png" alt="">
+          <div>
+            <h3>Portais</h3>
+            <p>Teletransporte para outros mundos; abrir custa <strong>5 chaves</strong> do bioma do portal. Chaves dropam dos inimigos daquele bioma.</p>
+          </div>
+        </article>
+        <article class="window-panel">
+          <h3>Pontos de viagem</h3>
+          <p>NPCs encontrados, baús, fontes e portais viram destinos rápidos que gastam <strong>mana</strong> ao usar.</p>
+        </article>
+      </div>
+
+      <div class="window-panel" style="margin-top:1rem;">
+        <h3>Darkworld &amp; Portal do Infinito</h3>
+        <p>
+          Os portais levam às masmorras <strong>D3 — Darkworld</strong>: há <strong>três tipos de inimigos Dark</strong>, cada um num tier próprio, que soltam itens corrompidos.
+          Cada bioma também guarda um <strong>boss tier 4</strong> e uma <strong>gema</strong>. Ao reunir as <strong>nove gemas</strong>, abre-se o <strong>portal do infinito</strong>
+          para o confronto com o boss final, sem encerrar o jogo de vez.
+        </p>
+        <p style="margin:0.65rem 0 0; font-size:0.92rem; color:var(--text-muted);">
+          Na dungeon Dark ligada ao bioma da <strong>Terra (Dirt)</strong>, o boss é especialmente <strong>poderoso</strong>: trava <strong>lutas insanas</strong> e serve como um dos picos de dificuldade do ciclo Darkworld.
+          Os chefes dos outros biomas ficam para você descobrir no jogo — aqui só destacamos esse primeiro como referência de intensidade.
+        </p>
+        <div class="dark-types" aria-label="Tipos de inimigo Dark por tier">
+          <figure>
+            <img class="sprite-pixel" src="spritepngoutput/DarkinhoSprite.png" alt="">
+            <figcaption><strong>T1</strong> — Darkinho</figcaption>
+          </figure>
+          <figure>
+            <img class="sprite-pixel" src="spritepngoutput/DarkSprite.png" alt="">
+            <figcaption><strong>T2</strong> — Dark</figcaption>
+          </figure>
+          <figure>
+            <img class="sprite-pixel" src="spritepngoutput/DarkaoSprite.png" alt="">
+            <figcaption><strong>T3</strong> — Darkão</figcaption>
+          </figure>
+        </div>
+        <p style="margin:0.75rem 0 0; font-size:0.88rem; color:var(--text-muted);">
+          Loot temático: <img class="sprite-pixel" src="spritepngoutput/CorruptFragmentSprite.png" alt="" style="width:clamp(36px,12vw,52px);height:clamp(36px,12vw,52px);vertical-align:middle;margin:0 0.35rem;"> fragmentos corrompidos e ingredientes ligados ao ciclo das dungeons.
+        </p>
+      </div>
+
+      <div class="window-panel window-panel--split" style="margin-top:1rem;">
+        <img class="sprite-pixel world-thumb" src="spritepngoutput/DirtHoleSprite.png" alt="">
+        <div>
+          <h3>SideWorld — buracos no terreno</h3>
+          <p>
+            Cada bioma pode gerar <strong>buracos</strong> que levam ao <strong>SideWorld</strong>: fase em <strong>scroll lateral 2D</strong>, estilo plataforma clássico.
+            No fim do trecho você pode encontrar NPC, baú, portal, pergaminho, item… ou nada.
+          </p>
+          <p style="margin:0.65rem 0 0;">
+            Os <strong>pergaminhos</strong> encontrados ao final desses trechos são especiais: guardam a <strong>localização de novos segredos</strong> —
+            coordenadas ou pistas que apontam para outro encontrável no mundo principal (NPC, fonte, baú ou portal), empurrando a exploração além do caminho óbvio.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="redes" class="section" aria-labelledby="redes-title">
+      <div class="section-head">
+        <h2 id="redes-title" class="pixel-title">Redes sociais</h2>
+        <span class="panel-tag">@geneworldgame</span>
+      </div>
+      <div class="social-strip">
+        <h2 class="pixel-title">Comunidade</h2>
+        <p class="social-handle">@geneworldgame</p>
+        <p style="margin:0 0 1rem; color:var(--text-muted); font-size:0.95rem;">
+          Novidades, clips de gameplay e bastidores do desenvolvimento — escolha sua plataforma favorita.
+          No Reddit o usuário é <strong>u/geneworld</strong> (sem “game” no fim).
+        </p>
+        <div class="social-links">
+          <a class="instagram" href="https://www.instagram.com/geneworldgame/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a class="tiktok" href="https://www.tiktok.com/@geneworldgame" target="_blank" rel="noopener noreferrer">TikTok</a>
+          <a class="reddit" href="https://www.reddit.com/user/geneworld/" target="_blank" rel="noopener noreferrer">Reddit</a>
+          <a class="youtube" href="https://www.youtube.com/@geneworldgame" target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="pixel-title">Gene World</p>
+    <p>Site estático — tema inspirado na interface do jogo. © Você — atualize textos e links conforme o lançamento.</p>
+  </footer>
+</body>
+</html>
