@@ -1090,6 +1090,36 @@ main {
   margin-bottom: 0.35rem;
 }
 
+.community-launch {
+  margin: 1.15rem 0 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.community-launch strong {
+  color: var(--gold-dim);
+}
+
+.community-soon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.community-soon-badge {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.38rem;
+  line-height: 1.5;
+  padding: 0.55rem 0.75rem;
+  border: 2px dashed rgba(255, 215, 0, 0.35);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
 /* Roadmap / future */
 .future-list {
   margin: 0;
