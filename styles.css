@@ -207,13 +207,18 @@ body {
 
 @media (max-width: 520px) {
   .masthead__logo {
-    width: min(72%, 360px);
-    top: 4%;
-    left: 0.5rem;
+    width: min(58%, 280px);
+    top: 3%;
+    left: max(0.1rem, env(safe-area-inset-left));
+  }
+
+  .masthead__logo img {
+    transform: translateX(-8%);
+    transform-origin: left center;
   }
 
   .masthead__tagline {
-    padding-left: 0.5rem;
+    padding-left: max(0.1rem, env(safe-area-inset-left));
   }
 }
 
