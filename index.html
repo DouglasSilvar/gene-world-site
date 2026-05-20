@@ -10,19 +10,32 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://store.steampowered.com">
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#topo">
-        <img class="brand-mark" src="gene.png" alt="" width="44" height="44">
-        <div class="brand-text">
-          <p class="pixel-title">GENE WORLD</p>
-          <p class="subtitle">RPG 2D • Mapa procedural</p>
-        </div>
+  <section class="masthead" id="topo" aria-label="Gene World">
+    <div class="masthead__visual">
+      <img
+        class="masthead__banner"
+        src="img/banner-wide.png"
+        srcset="img/banner-wide.png 1024w"
+        sizes="(min-width: 1100px) 1100px, 100vw"
+        alt="Gene World — aventura pixel art com heróis, castelo e criatura nas sombras"
+        width="1024"
+        height="331"
+        fetchpriority="high"
+        decoding="async">
+      <a class="masthead__logo" href="#topo">
+        <img src="img/logo-overlay.png" alt="Gene World" width="520" height="176" decoding="async">
       </a>
+    </div>
+    <p class="masthead__tagline">RPG 2D • Mapa procedural</p>
+  </section>
+
+  <header class="site-header site-header--nav">
+    <div class="header-inner">
       <nav class="nav-main" aria-label="Principal">
         <a href="#manual">Manual</a>
         <a href="#biomas">Biomas</a>
@@ -33,11 +46,45 @@
         <a href="#npcs">NPCs</a>
         <a href="#mundo">Mundo</a>
         <a href="#redes">Redes</a>
+        <a class="nav-steam" href="#steam-wishlist">Steam</a>
       </nav>
     </div>
   </header>
 
-  <section id="topo" class="hero">
+  <aside id="steam-wishlist" class="steam-wishlist" aria-labelledby="steam-wishlist-title">
+    <div class="steam-wishlist__inner">
+      <a class="steam-wishlist__art" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">
+        <img
+          class="steam-wishlist__img"
+          src="img/banner-wide.png"
+          alt="GeneWorld na Steam"
+          width="1024"
+          height="331"
+          loading="eager"
+          decoding="async">
+        <span class="steam-wishlist__badge">Página oficial no ar</span>
+      </a>
+      <div class="steam-wishlist__copy">
+        <p class="steam-wishlist__eyebrow">Steam · lançamento setembro de 2026</p>
+        <h2 id="steam-wishlist-title" class="steam-wishlist__title pixel-title">
+          <span class="steam-wishlist__shout">ADICIONA À LISTA DE DESEJOS NA STEAM!</span>
+        </h2>
+        <p class="steam-wishlist__lead">
+          A página do jogo já está publicada. Cada wishlist ajuda o <strong>GeneWorld</strong> a ganhar visibilidade antes do lançamento — leva menos de um minuto.
+        </p>
+        <div class="steam-wishlist__actions">
+          <a class="btn btn--steam btn--steam-lg" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">
+            Adicionar à lista de desejos
+          </a>
+          <a class="btn btn--ghost btn--steam-ghost" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">
+            Ver na Steam
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="hero">
     <div class="hero-copy">
       <h1 class="pixel-title">Gene World Game</h1>
       <p class="lead">
@@ -49,13 +96,11 @@
         enfrente inimigos em tiers e prepare-se para masmorras sombrias e o caminho rumo ao <strong>portal do infinito</strong>.
       </p>
       <div class="hero-actions">
+        <a class="btn btn--steam" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Lista de desejos</a>
         <a class="btn btn--gold" href="#manual">Abrir manual</a>
         <a class="btn btn--ghost" href="#redes">Seguir @geneworldgame</a>
       </div>
     </div>
-    <figure class="hero-art">
-      <img src="gene.png" alt="Arte pixel art de Gene World" width="640" height="640">
-    </figure>
   </section>
 
   <main id="conteudo">
@@ -800,18 +845,21 @@
         <p class="social-handle">@geneworldgame</p>
         <p style="margin:0 0 1rem; color:var(--text-muted); font-size:0.95rem;">
           Novidades, clips de gameplay e bastidores do desenvolvimento — escolha sua plataforma favorita.
-          No Reddit o usuário é <strong>u/geneworld</strong> (sem “game” no fim).
+          Comunidade no Reddit: <strong>r/GeneWorldGame</strong>.
         </p>
         <div class="social-links">
           <a class="instagram" href="https://www.instagram.com/geneworldgame/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a class="tiktok" href="https://www.tiktok.com/@geneworldgame" target="_blank" rel="noopener noreferrer">TikTok</a>
-          <a class="reddit" href="https://www.reddit.com/user/geneworld/" target="_blank" rel="noopener noreferrer">Reddit</a>
+          <a class="reddit" href="https://www.reddit.com/r/GeneWorldGame/" target="_blank" rel="noopener noreferrer">Reddit</a>
           <a class="youtube" href="https://www.youtube.com/@geneworldgame" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a class="steam" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Steam — lista de desejos</a>
         </div>
-        <p class="community-launch">Lançamento previsto para <strong>setembro de 2026</strong>.</p>
-        <div class="community-soon" role="group" aria-label="Plataformas em breve">
-          <span class="community-soon-badge">Em breve — Spotify</span>
-          <span class="community-soon-badge">Em breve — Steam</span>
+        <p class="community-launch">
+          <a href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Página na Steam no ar</a>
+          — adicione à lista de desejos. Lançamento do jogo em <strong>setembro de 2026</strong>.
+        </p>
+        <div class="community-soon" role="group" aria-label="Em breve">
+          <span class="community-soon-badge">Em breve — página no Spotify</span>
         </div>
       </div>
     </section>

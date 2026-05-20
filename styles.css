@@ -102,26 +102,16 @@ body {
   color: var(--gold);
 }
 
-.brand-mark {
-  width: 44px;
-  height: 44px;
-  border: 2px solid var(--gold);
-  border-radius: var(--radius);
-  object-fit: cover;
-  image-rendering: pixelated;
+.site-header--nav .header-inner {
+  justify-content: center;
 }
 
-.brand-text .pixel-title {
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  margin: 0 0 0.2rem;
-  line-height: 1.4;
-}
-
-.brand-text .subtitle {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+.site-header--nav {
+  position: static;
+  background: rgba(26, 18, 12, 0.88);
+  border-bottom: var(--border-ui);
+  border-top: none;
+  margin-bottom: 0.5rem;
 }
 
 .nav-main {
@@ -153,6 +143,248 @@ body {
   outline: none;
 }
 
+.nav-main a.nav-steam {
+  border-color: #66c0f4;
+  color: #a4d7f5;
+}
+
+.nav-main a.nav-steam:hover,
+.nav-main a.nav-steam:focus-visible {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Masthead — banner + logo vazado */
+.masthead {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.65rem max(1rem, env(safe-area-inset-left)) 0 max(1rem, env(safe-area-inset-right));
+}
+
+.masthead__visual {
+  position: relative;
+  border: var(--border-ui);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-panel);
+  background: #0a0e14;
+}
+
+.masthead__banner {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.masthead__logo {
+  position: absolute;
+  left: clamp(0.65rem, 3.5%, 1.5rem);
+  top: 6%;
+  width: min(62%, 480px);
+  text-decoration: none;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.masthead__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 18px rgba(255, 200, 80, 0.25));
+}
+
+.masthead__tagline {
+  margin: 0.5rem 0 0;
+  padding-left: clamp(0.65rem, 3.5%, 1.5rem);
+  text-align: left;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 520px) {
+  .masthead__logo {
+    width: min(72%, 360px);
+    top: 4%;
+    left: 0.5rem;
+  }
+
+  .masthead__tagline {
+    padding-left: 0.5rem;
+  }
+}
+
+/* Steam wishlist banner */
+.steam-wishlist {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 0 max(1rem, env(safe-area-inset-left)) 0 max(1rem, env(safe-area-inset-right));
+}
+
+.steam-wishlist__inner {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 3px solid #66c0f4;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(27, 40, 56, 0.97) 0%, rgba(42, 71, 94, 0.88) 45%, var(--panel) 100%);
+  box-shadow:
+    0 0 0 1px rgba(102, 192, 244, 0.35),
+    0 12px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  animation: steam-banner-glow 2.8s ease-in-out infinite;
+}
+
+@media (min-width: 720px) {
+  .steam-wishlist__inner {
+    grid-template-columns: minmax(240px, 44%) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steam-wishlist__inner,
+  .steam-wishlist__shout {
+    animation: none;
+  }
+}
+
+@keyframes steam-banner-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(102, 192, 244, 0.35),
+      0 12px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(102, 192, 244, 0.5),
+      0 12px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+}
+
+.steam-wishlist__art {
+  position: relative;
+  display: block;
+  border: 2px solid rgba(102, 192, 244, 0.65);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  aspect-ratio: 1024 / 331;
+  background: #0a0e14;
+}
+
+.steam-wishlist__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+.steam-wishlist__badge {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.32rem;
+  line-height: 1.4;
+  padding: 0.4rem 0.55rem;
+  background: rgba(61, 140, 64, 0.92);
+  color: #fff;
+  border: 2px solid #8fd492;
+  border-radius: 2px;
+}
+
+.steam-wishlist__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #66c0f4;
+  font-weight: 600;
+}
+
+.steam-wishlist__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(0.5rem, 2.6vw, 0.7rem);
+  line-height: 1.55;
+}
+
+.steam-wishlist__shout {
+  display: inline-block;
+  color: var(--gold);
+  text-shadow:
+    2px 2px 0 #1b2838,
+    0 0 12px rgba(255, 215, 0, 0.35);
+  animation: steam-shout-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes steam-shout-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.02);
+    filter: brightness(1.15);
+  }
+}
+
+.steam-wishlist__lead {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #c7d5e0;
+  max-width: 48ch;
+  line-height: 1.5;
+}
+
+.steam-wishlist__lead strong {
+  color: #66c0f4;
+}
+
+.steam-wishlist__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.btn--steam {
+  border-color: #66c0f4;
+  background: linear-gradient(180deg, #2a475e 0%, #1b2838 100%);
+  color: #fff;
+}
+
+.btn--steam:hover,
+.btn--steam:focus-visible {
+  border-color: #fff;
+  background: linear-gradient(180deg, #3d6b8c 0%, #2a475e 100%);
+  color: #a4d7f5;
+}
+
+.btn--steam-lg {
+  font-size: clamp(0.45rem, 2.2vw, 0.55rem);
+  padding: 1rem 1.25rem;
+}
+
+.btn--steam-ghost {
+  border-color: rgba(102, 192, 244, 0.55);
+  color: #c7d5e0;
+}
+
+.btn--steam-ghost:hover,
+.btn--steam-ghost:focus-visible {
+  border-color: #66c0f4;
+  color: #fff;
+}
+
 /* Hero */
 .hero {
   max-width: 1100px;
@@ -161,13 +393,6 @@ body {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: 1fr;
-}
-
-@media (min-width: 880px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
-    align-items: center;
-  }
 }
 
 .hero-copy h1.pixel-title {
@@ -187,22 +412,6 @@ body {
 
 .lead strong {
   color: var(--gold-dim);
-}
-
-.hero-art {
-  border: var(--border-ui);
-  border-radius: var(--radius);
-  background: var(--panel);
-  padding: 0.5rem;
-  box-shadow: var(--shadow-panel);
-}
-
-.hero-art img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 2px;
-  image-rendering: pixelated;
 }
 
 .hero-actions {
@@ -1072,6 +1281,15 @@ main {
 .social-links a.youtube {
   border-color: #ff0000;
 }
+.social-links a.steam {
+  border-color: #66c0f4;
+  grid-column: 1 / -1;
+}
+@media (min-width: 560px) {
+  .social-links a.steam {
+    grid-column: auto;
+  }
+}
 
 /* Footer */
 .site-footer {
@@ -1100,6 +1318,33 @@ main {
 
 .community-launch strong {
   color: var(--gold-dim);
+}
+
+.community-launch a {
+  color: #66c0f4;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.community-launch a:hover,
+.community-launch a:focus-visible {
+  color: var(--gold);
+  outline: none;
+}
+
+.community-soon-badge--live {
+  border-style: solid;
+  border-color: #66c0f4;
+  color: #c7d5e0;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.community-soon-badge--live:hover,
+.community-soon-badge--live:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  outline: none;
 }
 
 .community-soon {

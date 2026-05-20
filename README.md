@@ -53,7 +53,13 @@ gene-world-site/
 ├── index.html          # Página única do manual + redes
 ├── styles.css          # Tema e layout responsivo
 ├── spritepngoutput/    # Sprites PNG usados pelo HTML
-├── gene.png            # Arte principal / marca no hero
+├── img/
+│   ├── banner-wide.png   # Banner cinematográfico (topo do site)
+│   ├── banner-hero.png   # Banner com título (reserva / redes)
+│   ├── logo-overlay.png  # Logo vazado (sobre o banner)
+│   ├── logo-wordmark.png # Logo com fundo (fonte)
+│   └── logo.png          # Logo quadrado (alta resolução)
+├── gene.png            # Arte antiga (legado)
 ├── icon.ico            # Favicon
 └── README.md
 ```
@@ -68,7 +74,7 @@ gene-world-site/
 |------------|------|
 | Instagram | [@geneworldgame](https://www.instagram.com/geneworldgame/) |
 | TikTok | [@geneworldgame](https://www.tiktok.com/@geneworldgame) |
-| Reddit | [u/geneworld](https://www.reddit.com/user/geneworld/) |
+| Reddit | [r/GeneWorldGame](https://www.reddit.com/r/GeneWorldGame/) |
 | YouTube | [@geneworldgame](https://www.youtube.com/@geneworldgame) |
 
 ---
