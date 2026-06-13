@@ -117,52 +117,28 @@
   }
 
   function localizeLanguageOptions(lang) {
-    var toggle = document.getElementById("lang-toggle");
-    if (!toggle) return;
-
-    if (lang === "en") toggle.textContent = "🌐 Language";
-    else if (lang === "es-ES") toggle.textContent = "🌐 Idioma";
-    else toggle.textContent = "🌐 Idioma";
+    var select = document.getElementById("lang-select");
+    if (!select) return;
+    // Mantém nomes nativos para facilitar a escolha do idioma em qualquer língua.
+    var optionMap = {
+      "pt-BR": "🇧🇷 Português (BR)",
+      en: "🇺🇸 English",
+      "es-ES": "🇪🇸 Español (ES)",
+    };
+    for (var i = 0; i < select.options.length; i++) {
+      var option = select.options[i];
+      if (optionMap[option.value]) option.textContent = optionMap[option.value];
+    }
   }
 
   function bindSelector(lang) {
-    var toggle = document.getElementById("lang-toggle");
-    var menu = document.getElementById("lang-menu");
-    var options = document.querySelectorAll(".lang-fab__option");
-    if (!toggle || !menu || !options.length) return;
-
-    function setOpen(open) {
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      menu.hidden = !open;
-    }
-
-    for (var i = 0; i < options.length; i++) {
-      var option = options[i];
-      var optionLang = normalizeLang(option.getAttribute("data-lang"));
-      if (optionLang === lang) option.classList.add("is-active");
-      else option.classList.remove("is-active");
-
-      option.addEventListener("click", function (ev) {
-        var target = ev.currentTarget;
-        var next = normalizeLang(target.getAttribute("data-lang"));
-        persistLang(next);
-        window.location.reload();
-      });
-    }
-
-    toggle.addEventListener("click", function () {
-      var expanded = toggle.getAttribute("aria-expanded") === "true";
-      setOpen(!expanded);
-    });
-
-    document.addEventListener("click", function (ev) {
-      if (!menu.contains(ev.target) && !toggle.contains(ev.target)) {
-        setOpen(false);
-      }
-    });
-
-    document.addEventListener("keydown", function (ev) {
-      if (ev.key === "Escape") setOpen(false);
+    var select = document.getElementById("lang-select");
+    if (!select) return;
+    select.value = lang;
+    select.addEventListener("change", function () {
+      var next = normalizeLang(select.value);
+      persistLang(next);
+      window.location.reload();
     });
   }
 

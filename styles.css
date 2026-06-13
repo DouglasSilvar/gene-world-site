@@ -154,64 +154,28 @@ body {
   color: #fff;
 }
 
-.lang-fab {
-  position: relative;
-  display: inline-block;
-  margin-left: 0.35rem;
+.lang-inline {
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.42rem, 2.8vw, 0.5rem);
+  color: var(--text-muted);
+  padding: 0 0.15rem;
 }
 
-.lang-fab__toggle {
+.lang-inline__select {
   min-height: 44px;
   border: 2px solid #555;
   border-radius: var(--radius);
   background: linear-gradient(180deg, #3a322a, #2a241c);
   color: var(--text);
   font-family: "Press Start 2P", monospace;
-  font-size: clamp(0.36rem, 2.8vw, 0.44rem);
-  padding: 0.55rem 0.7rem;
-  text-align: left;
-  cursor: pointer;
+  font-size: clamp(0.36rem, 2.6vw, 0.42rem);
+  padding: 0.5rem 0.6rem;
+  max-width: min(250px, 82vw);
 }
 
-.lang-fab__toggle:hover,
-.lang-fab__toggle:focus-visible {
+.lang-inline__select:hover,
+.lang-inline__select:focus-visible {
   border-color: var(--gold);
-  outline: none;
-}
-
-.lang-fab__menu {
-  display: grid;
-  gap: 0.3rem;
-  position: absolute;
-  top: calc(100% + 0.35rem);
-  right: 0;
-  z-index: 70;
-  min-width: 220px;
-  padding: 0.45rem;
-  border: 2px solid var(--gold-dim);
-  border-radius: var(--radius);
-  background: rgba(26, 18, 12, 0.98);
-  box-shadow: var(--shadow-panel);
-}
-
-.lang-fab__option {
-  min-height: 36px;
-  border: 2px solid #555;
-  border-radius: var(--radius);
-  background: #261d15;
-  color: var(--text);
-  font-family: "Press Start 2P", monospace;
-  font-size: clamp(0.38rem, 2.4vw, 0.46rem);
-  padding: 0.5rem 0.55rem;
-  text-align: left;
-  cursor: pointer;
-}
-
-.lang-fab__option:hover,
-.lang-fab__option:focus-visible,
-.lang-fab__option.is-active {
-  border-color: var(--gold);
-  color: var(--gold);
   outline: none;
 }
 
