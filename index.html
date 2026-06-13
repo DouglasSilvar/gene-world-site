@@ -888,83 +888,79 @@
 
     <section id="hud-sistemas" class="section" aria-labelledby="hud-sistemas-title">
       <div class="section-head">
-        <h2 id="hud-sistemas-title" class="pixel-title">HUD: Relógio e previsão do tempo</h2>
-        <span class="panel-tag">4 frames RLE cada</span>
+        <h2 id="hud-sistemas-title" class="pixel-title">Relógio e clima do mundo</h2>
+        <span class="panel-tag">Impacto direto na gameplay</span>
       </div>
 
       <div class="hud-tabs">
         <article id="aba-relogio" class="window-panel hud-tab">
-          <h3>Aba do Relógio (TimeClockSprite)</h3>
+          <h3>Relógio do jogo</h3>
           <p>
-            O <strong>TimeClockSprite</strong> usa <strong>4 frames</strong> (64x64) para representar as fases do ciclo:
-            <strong>amanhecer</strong>, <strong>dia</strong>, <strong>anoitecer</strong> e <strong>noite</strong>.
-            No HUD ele aparece no canto superior direito. Em <strong>GeneWorld, 24 minutos reais = 24 horas do jogo</strong>.
+            Em <strong>GeneWorld, 24 minutos reais equivalem a 24 horas no jogo</strong>.
+            O relógio mostra se você está no período de amanhecer, dia, anoitecer ou noite.
           </p>
           <p>
-            Mapeamento oficial do código: <strong>DAWN (06–08)</strong> usa FRAME_1, <strong>DAY (08–18)</strong> usa FRAME_2,
-            <strong>DUSK (18–20)</strong> usa FRAME_3 e <strong>NIGHT (20–06)</strong> usa FRAME_4.
-            A cor do texto da hora também muda por fase para melhorar legibilidade.
+            Durante o <strong>dia</strong>, o mundo é mais seguro: os inimigos percebem você com <strong>"?"</strong>,
+            mas não entram imediatamente em ataque.
           </p>
           <ul>
-            <li><strong>Frames 1 e 2 (dia):</strong> período mais seguro. Os inimigos ficam em percepção de <strong>"?"</strong>, sentem sua presença, mas não entram direto em ataque.</li>
-            <li><strong>Frames 3 e 4 (noite):</strong> período de risco alto. A visão fica limitada, os inimigos entram em percepção de ataque à distância e o jogador ganha <strong>mais XP</strong>.</li>
+            <li><strong>Amanhecer e dia:</strong> exploração mais tranquila e menor pressão dos inimigos.</li>
+            <li><strong>Anoitecer e noite:</strong> visão mais limitada, inimigos já entram em percepção de ataque de longe e você ganha <strong>mais XP</strong>.</li>
           </ul>
           <div class="hud-frame-grid">
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame1.png" alt="Relógio frame 1 - amanhecer">
-              <figcaption>FRAME_1 · Amanhecer</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame1.png" alt="Ícone do relógio no amanhecer">
+              <figcaption>Amanhecer</figcaption>
             </figure>
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame2.png" alt="Relógio frame 2 - dia">
-              <figcaption>FRAME_2 · Dia</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame2.png" alt="Ícone do relógio durante o dia">
+              <figcaption>Dia</figcaption>
             </figure>
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame3.png" alt="Relógio frame 3 - anoitecer">
-              <figcaption>FRAME_3 · Anoitecer</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame3.png" alt="Ícone do relógio no anoitecer">
+              <figcaption>Anoitecer</figcaption>
             </figure>
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame4.png" alt="Relógio frame 4 - noite">
-              <figcaption>FRAME_4 · Noite</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/TimeClockSpriteFrame4.png" alt="Ícone do relógio durante a noite">
+              <figcaption>Noite</figcaption>
             </figure>
           </div>
         </article>
 
         <article id="aba-clima" class="window-panel hud-tab">
-          <h3>Aba do Clima/Tempo (WeatherForecastSprite)</h3>
+          <h3>Clima do dia</h3>
           <p>
-            O <strong>WeatherForecastSprite</strong> também usa <strong>4 frames</strong> (64x64) e é renderizado no HUD
-            <strong>à esquerda do relógio</strong>, com leve transparência.
+            O clima muda a partida e altera como você luta, se move e se prepara.
+            Quando um evento climático entra, ele afeta tanto o jogador quanto os inimigos.
           </p>
           <p>
-            Mapeamento oficial: FRAME_1 = <strong>chuva (RAIN)</strong>, FRAME_2 = <strong>neve (SNOW)</strong>,
-            FRAME_3 = <strong>vento (WIND)</strong> e FRAME_4 = <strong>chuva de meteoros (METEOR_SHOWER)</strong>.
-            O ícone aparece desde o início do dia quando há evento climático agendado.
+            Tipos de evento climático:
           </p>
           <ul>
-            <li><strong>FRAME_1 · Chuva:</strong> formam-se poças de água nos campos, inimigos ganham mais ataque e o mago tem o ataque básico reduzido.</li>
-            <li><strong>FRAME_2 · Neve:</strong> surgem terrenos com neve acumulada, o guerreiro ataca mais devagar e os inimigos têm mais vida.</li>
-            <li><strong>FRAME_3 · Ventania:</strong> a direção do vento (Norte, Sul, Leste, Oeste) interfere na movimentação, inimigos ficam mais rápidos e o ataque rápido do arqueiro faz curva conforme o vento.</li>
-            <li><strong>FRAME_4 · Chuva de meteoros:</strong> meteoros caem do céu causando dano e os inimigos recebem os 3 buffs ao mesmo tempo: velocidade, vida e ataque.</li>
+            <li><strong>Chuva:</strong> surgem poças nos campos, inimigos ganham mais ataque e o mago fica com ataque básico reduzido.</li>
+            <li><strong>Neve:</strong> o terreno acumula neve, o guerreiro ataca mais devagar e os inimigos ganham mais vida.</li>
+            <li><strong>Ventania:</strong> o vento (Norte, Sul, Leste ou Oeste) interfere na movimentação, acelera inimigos e curva o ataque rápido do arqueiro.</li>
+            <li><strong>Chuva de meteoros:</strong> meteoros caem do céu causando dano e os inimigos recebem buffs de velocidade, vida e ataque ao mesmo tempo.</li>
           </ul>
           <p>
-            <strong>Reset diário:</strong> todos os dias os eventos climáticos resetam e podem ocorrer ou não.
+            <strong>Importante:</strong> os eventos climáticos resetam todos os dias e podem ocorrer ou não.
           </p>
           <div class="hud-frame-grid">
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame1.png" alt="Clima frame 1 - chuva">
-              <figcaption>FRAME_1 · Chuva</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame1.png" alt="Ícone de clima de chuva">
+              <figcaption>Chuva</figcaption>
             </figure>
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame2.png" alt="Clima frame 2 - neve">
-              <figcaption>FRAME_2 · Neve</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame2.png" alt="Ícone de clima de neve">
+              <figcaption>Neve</figcaption>
             </figure>
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame3.png" alt="Clima frame 3 - vento">
-              <figcaption>FRAME_3 · Vento</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame3.png" alt="Ícone de clima de ventania">
+              <figcaption>Ventania</figcaption>
             </figure>
             <figure>
-              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame4.png" alt="Clima frame 4 - meteoros">
-              <figcaption>FRAME_4 · Meteoros</figcaption>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame4.png" alt="Ícone de clima de chuva de meteoros">
+              <figcaption>Chuva de meteoros</figcaption>
             </figure>
           </div>
         </article>
@@ -1005,12 +1001,14 @@
     <p class="pixel-title">Gene World</p>
   </footer>
   <aside class="lang-fab" aria-label="Idioma">
-    <label for="lang-select" class="lang-fab__label">🌐 Idioma</label>
-    <select id="lang-select" class="lang-fab__select" aria-label="Selecionar idioma">
-      <option value="pt-BR">🇧🇷 PT-BR</option>
-      <option value="en">🇺🇸 EN</option>
-      <option value="es-ES">🇪🇸 ES</option>
-    </select>
+    <button id="lang-toggle" class="lang-fab__toggle" type="button" aria-haspopup="menu" aria-expanded="false">
+      🌐 Idioma
+    </button>
+    <div id="lang-menu" class="lang-fab__menu" role="menu" hidden>
+      <button type="button" class="lang-fab__option" data-lang="pt-BR" role="menuitem">🇧🇷 Português (BR)</button>
+      <button type="button" class="lang-fab__option" data-lang="en" role="menuitem">🇺🇸 English</button>
+      <button type="button" class="lang-fab__option" data-lang="es-ES" role="menuitem">🇪🇸 Español (ES)</button>
+    </div>
   </aside>
   <script src="i18n.js" defer></script>
 </body>

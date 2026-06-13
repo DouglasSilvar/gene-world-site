@@ -117,33 +117,52 @@
   }
 
   function localizeLanguageOptions(lang) {
-    var label = document.querySelector(".lang-fab__label");
-    var select = document.getElementById("lang-select");
-    if (!label || !select) return;
+    var toggle = document.getElementById("lang-toggle");
+    if (!toggle) return;
 
-    if (lang === "en") label.textContent = "🌐 Language";
-    else if (lang === "es-ES") label.textContent = "🌐 Idioma";
-    else label.textContent = "🌐 Idioma";
-
-    var optionMap = {
-      "pt-BR": "🇧🇷 PT-BR",
-      en: "🇺🇸 EN",
-      "es-ES": "🇪🇸 ES",
-    };
-    for (var i = 0; i < select.options.length; i++) {
-      var option = select.options[i];
-      if (optionMap[option.value]) option.textContent = optionMap[option.value];
-    }
+    if (lang === "en") toggle.textContent = "🌐 Language";
+    else if (lang === "es-ES") toggle.textContent = "🌐 Idioma";
+    else toggle.textContent = "🌐 Idioma";
   }
 
   function bindSelector(lang) {
-    var select = document.getElementById("lang-select");
-    if (!select) return;
-    select.value = lang;
-    select.addEventListener("change", function () {
-      var next = normalizeLang(select.value);
-      persistLang(next);
-      window.location.reload();
+    var toggle = document.getElementById("lang-toggle");
+    var menu = document.getElementById("lang-menu");
+    var options = document.querySelectorAll(".lang-fab__option");
+    if (!toggle || !menu || !options.length) return;
+
+    function setOpen(open) {
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.hidden = !open;
+    }
+
+    for (var i = 0; i < options.length; i++) {
+      var option = options[i];
+      var optionLang = normalizeLang(option.getAttribute("data-lang"));
+      if (optionLang === lang) option.classList.add("is-active");
+      else option.classList.remove("is-active");
+
+      option.addEventListener("click", function (ev) {
+        var target = ev.currentTarget;
+        var next = normalizeLang(target.getAttribute("data-lang"));
+        persistLang(next);
+        window.location.reload();
+      });
+    }
+
+    toggle.addEventListener("click", function () {
+      var expanded = toggle.getAttribute("aria-expanded") === "true";
+      setOpen(!expanded);
+    });
+
+    document.addEventListener("click", function (ev) {
+      if (!menu.contains(ev.target) && !toggle.contains(ev.target)) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") setOpen(false);
     });
   }
 
