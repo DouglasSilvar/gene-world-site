@@ -1306,6 +1306,120 @@ main {
   line-height: 1.35;
 }
 
+/* Discography */
+.discography-strip {
+  background: var(--panel);
+  border: var(--border-ui);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-panel);
+}
+
+.discography-eyebrow {
+  margin: 0 0 0.45rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-dim);
+  font-weight: 600;
+}
+
+.discography-album {
+  margin: 0 0 0.35rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.42rem, 2.4vw, 0.55rem);
+  line-height: 1.55;
+  color: var(--gold);
+}
+
+.discography-meta {
+  margin: 0 0 0.85rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.discography-lead {
+  margin: 0 0 1.1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 58ch;
+  line-height: 1.5;
+}
+
+.discography-lead strong {
+  color: var(--gold-dim);
+}
+
+.discography-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+}
+
+@media (min-width: 560px) {
+  .discography-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.discography-link {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.42rem;
+  padding: 0.75rem 0.85rem;
+  min-height: 48px;
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid #888;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #444, #2a2a2a);
+  transition: border-color 0.15s, color 0.15s, transform 0.12s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.discography-link:hover,
+.discography-link:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.discography-link--spotify {
+  border-color: #1db954;
+  background: linear-gradient(180deg, #1a6b38 0%, #0f3d21 100%);
+}
+
+.discography-link--spotify:hover,
+.discography-link--spotify:focus-visible {
+  border-color: #1ed760;
+  color: #1ed760;
+}
+
+.discography-link--youtube {
+  border-color: #ff0000;
+  background: linear-gradient(180deg, #8b1a1a 0%, #4a0d0d 100%);
+}
+
+.discography-link--youtube:hover,
+.discography-link--youtube:focus-visible {
+  border-color: #ff4444;
+  color: #ff4444;
+}
+
+.discography-link--apple {
+  border-color: #fa2d48;
+  background: linear-gradient(180deg, #8b1f2f 0%, #4a1018 100%);
+}
+
+.discography-link--apple:hover,
+.discography-link--apple:focus-visible {
+  border-color: #ff5c6e;
+  color: #ff5c6e;
+}
+
 /* Social */
 .social-strip {
   background: var(--panel);
