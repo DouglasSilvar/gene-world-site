@@ -189,6 +189,57 @@ body {
   font-weight: 700;
 }
 
+.nav-streaming {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-streaming__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0.45rem;
+  border: 2px solid #555;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #3a322a, #2a241c);
+  text-decoration: none;
+  transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+}
+
+.nav-streaming__link img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.nav-streaming__link:hover,
+.nav-streaming__link:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.nav-streaming__link--spotify:hover,
+.nav-streaming__link--spotify:focus-visible {
+  border-color: #1db954;
+  box-shadow: 0 0 10px rgba(29, 185, 84, 0.35);
+}
+
+.nav-streaming__link--youtube:hover,
+.nav-streaming__link--youtube:focus-visible {
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.nav-streaming__link--apple:hover,
+.nav-streaming__link--apple:focus-visible {
+  border-color: #fa243c;
+  box-shadow: 0 0 10px rgba(250, 36, 60, 0.35);
+}
+
 /* Masthead — banner + logo vazado */
 .masthead {
   max-width: 1100px;
@@ -1376,7 +1427,15 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.55rem;
   text-align: center;
+}
+
+.discography-link__icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .discography-link:hover,
