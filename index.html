@@ -61,6 +61,7 @@
         <a href="#armas">Armas</a>
         <a href="#materiais">Materiais</a>
         <a href="#pocoes">Poções</a>
+        <a href="#instrumentos">Instrumentos</a>
         <a href="#npcs">NPCs</a>
         <a href="#mundo">Mundo</a>
         <a href="#aba-relogio">Relógio</a>
@@ -773,7 +774,7 @@
       </div>
       <p style="color:var(--text-muted); margin:-0.35rem 0 1rem; font-size:0.92rem;">
         <strong>Gogarion</strong>, <strong>Quintino</strong> e <strong>Robiati</strong> são encontros fixos do early game.
-        <strong>Ronaldo</strong>, <strong>Correia</strong> e <strong>Lidi Naga Fada</strong> são <strong>andarilhos</strong> (aparecem ao explorar).
+        <strong>Ronaldo</strong>, <strong>Correia</strong>, <strong>Lidi Naga Fada</strong>, <strong>Jester</strong>, <strong>Bardo</strong> e <strong>Cigana</strong> são <strong>andarilhos</strong> (aparecem ao explorar).
       </p>
       <div class="npc-list">
         <article class="npc-card">
@@ -838,7 +839,75 @@
               <img class="sprite-pixel" src="spritepngoutput/LidiNagaFadaNPC.png" alt="">
               <figcaption><strong>Lidi Naga Fada</strong> — você paga o valor que quiser; o Lidi Naga escolhe um buff adequado por <strong>3 minutos</strong>.</figcaption>
             </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/NPCJester.png" alt="">
+              <figcaption><strong>Jester — Bobo da Corte</strong> — aposta uma <strong>corrida</strong> valendo moedas (0–100, base 30) e uma <strong>caixinha surpresa</strong> se você chegar primeiro.</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/NPCBardo.png" alt="">
+              <figcaption><strong>Bardo</strong> — desafia você a um <strong>desafio musical</strong>; vencendo, ganha um <strong>instrumento lendário</strong> de prêmio (e a taxa de volta).</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/NPCGypsy.png" alt="">
+              <figcaption><strong>Cigana</strong> — por algumas <strong>moedas</strong>, prevê o futuro e aponta coordenadas no mapa (aparece entre <strong>02:00 e 10:00</strong>).</figcaption>
+            </figure>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="instrumentos" class="section" aria-labelledby="instrumentos-title">
+      <div class="section-head">
+        <h2 id="instrumentos-title" class="pixel-title">Instrumentos musicais</h2>
+        <span class="panel-tag">Modo música</span>
+      </div>
+      <div class="window-panel" style="margin-bottom:1rem;">
+        <h3>Como funcionam</h3>
+        <p style="margin-bottom:0;">
+          São <strong>consumíveis lendários reutilizáveis</strong>: use com <strong>C</strong> ou na barra <strong>6–0</strong> para entrar no <strong>modo música</strong> — toque notas com as teclas <strong>1–7</strong>, sem perder o item do inventário.
+          O <strong>Bardo</strong> andarilho desafia você a um minijogo musical; ao vencer, entrega um dos oito instrumentos abaixo.
+        </p>
+      </div>
+      <div class="materials-grid potion-grid instrument-grid" role="list">
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/FluteSprite.png" alt="">
+          <span class="mat-title">Flauta</span>
+          <small>Notas sustentadas. Ideal para melodias leves.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/BanjoSprite.png" alt="">
+          <span class="mat-title">Banjo</span>
+          <small>Cordas vibrantes com timbre alegre.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/BassSprite.png" alt="">
+          <span class="mat-title">Baixo</span>
+          <small>Graves profundos para embasar a performance.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/DrumSprite.png" alt="">
+          <span class="mat-title">Tambor</span>
+          <small>Percurssão marcante para ritmos energéticos.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/AccordionSprite.png" alt="">
+          <span class="mat-title">Sanfona</span>
+          <small>Acordeões expressivos de clima festivo.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/HarpSprite.png" alt="">
+          <span class="mat-title">Harpa</span>
+          <small>Cordas etéreas com ressonância suave.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/HornSprite.png" alt="">
+          <span class="mat-title">Trompa</span>
+          <small>Metais brilhantes para fanfarras e chamadas.</small>
+        </div>
+        <div class="mat-cell" role="listitem">
+          <img class="sprite-pixel mat-sprite" src="spritepngoutput/TambourineSprite.png" alt="">
+          <span class="mat-title">Pandeiro</span>
+          <small>Chocalhos e batidas leves para marcar o compasso.</small>
         </div>
       </div>
     </section>

@@ -19,7 +19,7 @@ Serve como **manual online**: biomas, inimigos, atributos, armas, materiais, po�
 
 - Manual navegável por âncoras (ideal para celular e desktop)
 - Sprites do jogo em `spritepngoutput/` apenas onde aparecem no layout (**assets reduzidos** para publicação)
-- Seções: nove biomas, inimigos globais + totens, kits de arma (madeira), materiais (espadas + exemplo couro), **poções** com textos do jogo, NPCs fixos e andarilhos, mapa / SideWorld / Darkworld
+- Seções: nove biomas, inimigos globais + totens, kits de arma (madeira), materiais (espadas + exemplo couro), **poções** com textos do jogo, **instrumentos musicais** (modo música), NPCs fixos e andarilhos (incl. Jester, Bardo e Cigana), mapa / SideWorld / Darkworld
 - UI pensada para lembrar painéis do Gene World (janelas, slots, grid)
 
 ---
@@ -52,6 +52,8 @@ Depois aceda a `http://localhost:8080`.
 gene-world-site/
 ├── index.html          # Página única do manual + redes
 ├── styles.css          # Tema e layout responsivo
+├── scripts/
+│   └── export-hud-rle-sprites.py  # Exporta sprites RLE Java → PNG
 ├── spritepngoutput/    # Sprites PNG usados pelo HTML
 ├── img/
 │   ├── banner-wide.png   # Banner cinematográfico (topo do site)

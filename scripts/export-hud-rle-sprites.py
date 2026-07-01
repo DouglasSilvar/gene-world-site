@@ -1,4 +1,4 @@
-"""Exporta sprites Java RLE (64x64) para PNG no site."""
+"""Exporta sprites Java RLE (Grid Editor) para PNG no site."""
 from __future__ import annotations
 
 import re
@@ -6,9 +6,14 @@ from pathlib import Path
 
 from PIL import Image
 
-
 ROOT = Path(__file__).resolve().parents[2]
-SRC = ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "otherworldsdecoration"
+SPRITES_NPC = (
+    ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "npc" / "terrainspersons"
+)
+SPRITES_INSTRUMENTS = (
+    ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "itens" / "instruments"
+)
+SPRITES_HUD = ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "otherworldsdecoration"
 OUT = ROOT / "geneworld-site" / "spritepngoutput"
 
 PALETTE = {
@@ -46,8 +51,12 @@ PALETTE = {
     31: (237, 130, 237, 255),
 }
 
+RE_FRAME_RLE = re.compile(r'FRAME_(\d+)_RLE\s*=\s*"([^"]*)";', re.DOTALL)
+RE_WIDTH = re.compile(r"public\s+static\s+final\s+int\s+WIDTH\s*=\s*(\d+)\s*;")
+RE_HEIGHT = re.compile(r"public\s+static\s+final\s+int\s+HEIGHT\s*=\s*(\d+)\s*;")
 
-def decode_rle(rle: str, width: int = 64, height: int = 64) -> list[tuple[int, int, int, int]]:
+
+def decode_rle(rle: str, width: int, height: int) -> list[tuple[int, int, int, int]]:
     parts = [int(x) for x in rle.split(",")]
     pixels: list[tuple[int, int, int, int]] = []
     for i in range(0, len(parts), 2):
@@ -61,32 +70,69 @@ def decode_rle(rle: str, width: int = 64, height: int = 64) -> list[tuple[int, i
     return pixels
 
 
-def extract_frames(java_path: Path) -> list[str]:
+def read_sprite_size(java_path: Path) -> tuple[int, int]:
     text = java_path.read_text(encoding="utf-8")
-    pattern = re.compile(r'FRAME_(\d+)_RLE\s*=\s*"([^"]*)";', re.DOTALL)
-    matches = sorted(((int(i), rle) for i, rle in pattern.findall(text)), key=lambda x: x[0])
-    if len(matches) != 4:
-        raise ValueError(f"Expected 4 frames in {java_path.name}, got {len(matches)}")
-    return [rle for _, rle in matches]
+    width_match = RE_WIDTH.search(text)
+    height_match = RE_HEIGHT.search(text)
+    if not width_match or not height_match:
+        raise ValueError(f"WIDTH/HEIGHT not found in {java_path.name}")
+    return int(width_match.group(1)), int(height_match.group(1))
 
 
-def export_sprite_frames(class_name: str) -> None:
-    java_file = SRC / f"{class_name}.java"
-    rles = extract_frames(java_file)
+def extract_frame_rle(java_path: Path, frame_index: int) -> str:
+    text = java_path.read_text(encoding="utf-8")
+    matches = {int(i): rle for i, rle in RE_FRAME_RLE.findall(text)}
+    if frame_index not in matches:
+        raise ValueError(f"FRAME_{frame_index}_RLE not found in {java_path.name}")
+    return matches[frame_index]
 
-    for idx, rle in enumerate(rles, start=1):
-        pixels = decode_rle(rle)
-        image = Image.new("RGBA", (64, 64))
+
+def export_frame(java_path: Path, frame_index: int, out_name: str) -> None:
+    width, height = read_sprite_size(java_path)
+    rle = extract_frame_rle(java_path, frame_index)
+    pixels = decode_rle(rle, width, height)
+    image = Image.new("RGBA", (width, height))
+    image.putdata(pixels)
+    out_file = OUT / out_name
+    image.save(out_file, optimize=True)
+    print(f"saved {out_file.name}")
+
+
+def export_all_frames(java_path: Path, class_name: str | None = None) -> None:
+    name = class_name or java_path.stem
+    text = java_path.read_text(encoding="utf-8")
+    width, height = read_sprite_size(java_path)
+    matches = sorted(((int(i), rle) for i, rle in RE_FRAME_RLE.findall(text)), key=lambda x: x[0])
+    for idx, rle in matches:
+        pixels = decode_rle(rle, width, height)
+        image = Image.new("RGBA", (width, height))
         image.putdata(pixels)
-        out_file = OUT / f"{class_name}Frame{idx}.png"
+        out_file = OUT / f"{name}Frame{idx}.png"
         image.save(out_file, optimize=True)
         print(f"saved {out_file.name}")
 
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    export_sprite_frames("TimeClockSprite")
-    export_sprite_frames("WeatherForecastSprite")
+
+    for class_name in ("TimeClockSprite", "WeatherForecastSprite"):
+        export_all_frames(SPRITES_HUD / f"{class_name}.java", class_name)
+
+    for class_name in ("NPCJester", "NPCBardo", "NPCGypsy"):
+        export_frame(SPRITES_NPC / f"{class_name}.java", 1, f"{class_name}.png")
+
+    instrument_exports = [
+        ("FluteBanjoBassDrum.java", 1, "FluteSprite.png"),
+        ("FluteBanjoBassDrum.java", 2, "BanjoSprite.png"),
+        ("FluteBanjoBassDrum.java", 3, "BassSprite.png"),
+        ("FluteBanjoBassDrum.java", 4, "DrumSprite.png"),
+        ("AccordionHarpHornTamborine.java", 1, "AccordionSprite.png"),
+        ("AccordionHarpHornTamborine.java", 2, "HarpSprite.png"),
+        ("AccordionHarpHornTamborine.java", 3, "HornSprite.png"),
+        ("AccordionHarpHornTamborine.java", 4, "TambourineSprite.png"),
+    ]
+    for java_file, frame_index, out_name in instrument_exports:
+        export_frame(SPRITES_INSTRUMENTS / java_file, frame_index, out_name)
 
 
 if __name__ == "__main__":
