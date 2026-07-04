@@ -1479,6 +1479,117 @@ main {
   color: #ff5c6e;
 }
 
+/* Media Kit page */
+.hero--compact {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.mediakit-main {
+  padding-top: 0.5rem;
+}
+
+.mediakit-card {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: var(--panel);
+  border: var(--border-ui);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-panel);
+}
+
+@media (min-width: 720px) {
+  .mediakit-card {
+    grid-template-columns: minmax(180px, 34%) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.mediakit-card__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, rgba(255, 215, 0, 0.08), transparent),
+    var(--panel-alt);
+  border: 2px solid rgba(255, 215, 0, 0.25);
+  border-radius: var(--radius);
+}
+
+.mediakit-card__visual img {
+  display: block;
+  width: min(100%, 220px);
+  height: auto;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.45));
+}
+
+.mediakit-eyebrow {
+  margin: 0 0 0.45rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gold-dim);
+  font-weight: 600;
+}
+
+.mediakit-filename {
+  margin: 0 0 0.65rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.45rem, 2.5vw, 0.62rem);
+  line-height: 1.55;
+  color: var(--gold);
+}
+
+.mediakit-lead {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 58ch;
+  line-height: 1.5;
+}
+
+.mediakit-list {
+  margin: 0 0 1.15rem;
+  padding-left: 1.2rem;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.mediakit-list li {
+  margin-bottom: 0.25rem;
+}
+
+.mediakit-list li::marker {
+  color: var(--gold-dim);
+}
+
+.mediakit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.btn--download {
+  font-size: clamp(0.45rem, 2.2vw, 0.55rem);
+  padding: 1rem 1.25rem;
+}
+
+.mediakit-note {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+  line-height: 1.45;
+}
+
+.nav-main a[aria-current="page"] {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
 /* Social */
 .social-strip {
   background: var(--panel);

@@ -50,6 +50,7 @@
   }
 
   function updateMetadata(lang) {
+    if (document.body && document.body.dataset.i18nSkipMeta !== undefined) return;
     var meta = META[lang] || META[DEFAULT_LANG];
     document.documentElement.lang = lang;
     document.title = meta.title;
@@ -157,7 +158,8 @@
 
   function loadLocaleDictionary(lang) {
     if (lang === DEFAULT_LANG) return Promise.resolve({});
-    return fetch("locales/" + lang + ".json", { cache: "no-cache" })
+    var localeBase = typeof window.GW_LOCALE_BASE === "string" ? window.GW_LOCALE_BASE : "";
+    return fetch(localeBase + "locales/" + lang + ".json", { cache: "no-cache" })
       .then(function (res) {
         if (!res.ok) throw new Error("Locale fetch failed: " + lang);
         return res.json();
