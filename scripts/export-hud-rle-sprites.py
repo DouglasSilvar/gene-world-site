@@ -115,7 +115,7 @@ def export_all_frames(java_path: Path, class_name: str | None = None) -> None:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
 
-    for class_name in ("TimeClockSprite", "WeatherForecastSprite"):
+    for class_name in ("TimeClockSprite", "WeatherForecastSprite", "WeatherForecast2Sprite", "PortalCastleSprite"):
         export_all_frames(SPRITES_HUD / f"{class_name}.java", class_name)
 
     for class_name in ("NPCJester", "NPCBardo", "NPCGypsy"):

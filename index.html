@@ -118,22 +118,22 @@
           height="331"
           loading="eager"
           decoding="async">
-        <span class="steam-wishlist__badge">Página oficial no ar</span>
+        <span class="steam-wishlist__badge">Demo disponível</span>
       </a>
       <div class="steam-wishlist__copy">
-        <p class="steam-wishlist__eyebrow">Steam · lançamento setembro de 2026</p>
+        <p class="steam-wishlist__eyebrow">Steam · demo no ar · lançamento setembro de 2026</p>
         <h2 id="steam-wishlist-title" class="steam-wishlist__title pixel-title">
-          <span class="steam-wishlist__shout">ADICIONA À LISTA DE DESEJOS NA STEAM!</span>
+          <span class="steam-wishlist__shout">DEMO GRATUITA NA STEAM!</span>
         </h2>
         <p class="steam-wishlist__lead">
-          A página do jogo já está publicada. Cada wishlist ajuda o <strong>GeneWorld</strong> a ganhar visibilidade antes do lançamento — leva menos de um minuto.
+          A página oficial já está no ar com <strong>demo jogável</strong>. Baixe agora, explore o mundo procedural e adicione o <strong>GeneWorld</strong> à lista de desejos para ser avisado no lançamento.
         </p>
         <div class="steam-wishlist__actions">
-          <a class="btn btn--steam btn--steam-lg" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">
-            Adicionar à lista de desejos
+          <a class="btn btn--steam btn--steam-lg btn--demo" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">
+            Baixar demo na Steam
           </a>
           <a class="btn btn--ghost btn--steam-ghost" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">
-            Ver na Steam
+            Lista de desejos
           </a>
         </div>
       </div>
@@ -184,7 +184,8 @@
         enfrente inimigos em tiers e prepare-se para masmorras sombrias e o caminho rumo ao <strong>portal do infinito</strong>.
       </p>
       <div class="hero-actions">
-        <a class="btn btn--steam" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Lista de desejos</a>
+        <a class="btn btn--steam btn--demo" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Baixar demo na Steam</a>
+        <a class="btn btn--ghost btn--steam-ghost" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Lista de desejos</a>
         <a class="btn btn--gold" href="#manual">Abrir manual</a>
         <a class="btn btn--ghost" href="#redes">Seguir @geneworldgame</a>
       </div>
@@ -970,6 +971,17 @@
             <p>Teletransporte para outros mundos; abrir custa <strong>5 chaves</strong> do bioma do portal. Chaves dropam dos inimigos daquele bioma.</p>
           </div>
         </article>
+        <article class="window-panel window-panel--split">
+          <img class="sprite-pixel world-thumb world-thumb--castle" src="spritepngoutput/PortalCastleSpriteFrame1.png" alt="Portal do castelo em ruínas">
+          <div>
+            <h3>Portal do castelo em ruínas</h3>
+            <p>
+              Um portal especial escondido no mapa leva a um <strong>castelo em ruínas</strong> com recompensas próprias.
+              Para abri-lo, os jogadores precisam ativar os botões ao redor do octógono — castelos de <strong>nível 1</strong> exigem <strong>1 jogador</strong>,
+              enquanto castelos de <strong>nível 4</strong> pedem que <strong>4 jogadores</strong> pressionem os ativadores ao mesmo tempo.
+            </p>
+          </div>
+        </article>
         <article class="window-panel">
           <h3>Pontos de viagem</h3>
           <p>NPCs encontrados, baús, fontes e portais viram destinos rápidos que gastam <strong>mana</strong> ao usar.</p>
@@ -1077,11 +1089,15 @@
             <li><strong>Neve:</strong> o terreno acumula neve, o guerreiro ataca mais devagar e os inimigos ganham mais vida.</li>
             <li><strong>Ventania:</strong> o vento (Norte, Sul, Leste ou Oeste) interfere na movimentação, acelera inimigos e curva o ataque rápido do arqueiro.</li>
             <li><strong>Chuva de meteoros:</strong> meteoros caem do céu causando dano e os inimigos recebem buffs de velocidade, vida e ataque ao mesmo tempo.</li>
+            <li><strong>Tempestade de areia:</strong> a visão cai drasticamente com a areia no ar; a exploração fica mais tensa e os inimigos ganham vantagem no campo.</li>
+            <li><strong>Neblina:</strong> uma névoa densa cobre o mapa e limita o que você enxerga além do entorno imediato.</li>
+            <li><strong>Chuva de estrelas:</strong> estrelas caem do céu como projéteis perigosos, forçando deslocamento constante durante o combate.</li>
+            <li><strong>Terremoto:</strong> o chão treme, rochas caem e o mundo inteiro entra em estado de caos até o evento passar.</li>
           </ul>
           <p>
             <strong>Importante:</strong> os eventos climáticos resetam todos os dias e podem ocorrer ou não.
           </p>
-          <div class="hud-frame-grid">
+          <div class="hud-frame-grid hud-frame-grid--weather">
             <figure>
               <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame1.png" alt="Ícone de clima de chuva">
               <figcaption>Chuva</figcaption>
@@ -1097,6 +1113,22 @@
             <figure>
               <img class="sprite-pixel" src="spritepngoutput/WeatherForecastSpriteFrame4.png" alt="Ícone de clima de chuva de meteoros">
               <figcaption>Chuva de meteoros</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecast2SpriteFrame1.png" alt="Ícone de clima de tempestade de areia">
+              <figcaption>Tempestade de areia</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecast2SpriteFrame2.png" alt="Ícone de clima de neblina">
+              <figcaption>Neblina</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecast2SpriteFrame3.png" alt="Ícone de clima de chuva de estrelas">
+              <figcaption>Chuva de estrelas</figcaption>
+            </figure>
+            <figure>
+              <img class="sprite-pixel" src="spritepngoutput/WeatherForecast2SpriteFrame4.png" alt="Ícone de clima de terremoto">
+              <figcaption>Terremoto</figcaption>
             </figure>
           </div>
         </article>
@@ -1165,11 +1197,15 @@
           <a class="tiktok" href="https://www.tiktok.com/@geneworldgame" target="_blank" rel="noopener noreferrer">TikTok</a>
           <a class="reddit" href="https://www.reddit.com/r/GeneWorldGame/" target="_blank" rel="noopener noreferrer">Reddit</a>
           <a class="youtube" href="https://www.youtube.com/@geneworldgame" target="_blank" rel="noopener noreferrer">YouTube</a>
-          <a class="steam" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Steam — lista de desejos</a>
+          <a class="discord" href="https://discord.gg/FCZZrB2G8" target="_blank" rel="noopener noreferrer">
+            <img class="social-link__icon" src="img/icons/discord-logo.png" alt="" width="22" height="22" decoding="async">
+            Discord
+          </a>
+          <a class="steam" href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Steam — demo e lista de desejos</a>
         </div>
         <p class="community-launch">
-          <a href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Página na Steam no ar</a>
-          — adicione à lista de desejos. Lançamento do jogo em <strong>setembro de 2026</strong>.
+          <a href="https://store.steampowered.com/app/4717910/GeneWorld/" target="_blank" rel="noopener noreferrer">Demo gratuita na Steam</a>
+          — baixe agora e adicione à lista de desejos. Lançamento do jogo em <strong>setembro de 2026</strong>.
         </p>
       </div>
     </section>

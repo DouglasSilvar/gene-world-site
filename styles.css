@@ -549,6 +549,12 @@ body {
   padding: 1rem 1.25rem;
 }
 
+.btn--demo {
+  box-shadow:
+    0 0 0 1px rgba(102, 192, 244, 0.45),
+    0 0 18px rgba(102, 192, 244, 0.35);
+}
+
 .btn--steam-ghost {
   border-color: rgba(102, 192, 244, 0.55);
   color: #c7d5e0;
@@ -1272,6 +1278,11 @@ main {
   padding: 4px;
 }
 
+.world-thumb--castle {
+  width: clamp(96px, 28vw, 160px);
+  height: clamp(96px, 28vw, 160px);
+}
+
 .window-panel .world-thumb {
   float: none;
   margin: 0 auto 0.65rem;
@@ -1376,6 +1387,10 @@ main {
   .hud-frame-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+}
+
+.hud-frame-grid--weather {
+  margin-top: 1rem;
 }
 
 .hud-frame-grid figure {
@@ -1750,9 +1765,20 @@ main {
 .social-links a.youtube {
   border-color: #ff0000;
 }
+.social-links a.discord {
+  border-color: #5865f2;
+  gap: 0.45rem;
+}
 .social-links a.steam {
   border-color: #66c0f4;
   grid-column: 1 / -1;
+}
+
+.social-link__icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 @media (min-width: 560px) {
   .social-links a.steam {
