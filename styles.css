@@ -189,13 +189,28 @@ body {
   font-weight: 700;
 }
 
-.nav-streaming {
+.nav-external {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.nav-external__group {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.nav-streaming__link {
+.nav-external__divider {
+  width: 2px;
+  height: 28px;
+  background: rgba(255, 215, 0, 0.35);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.nav-icon-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -209,35 +224,61 @@ body {
   transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s;
 }
 
-.nav-streaming__link img {
+.nav-icon-link img {
   display: block;
   width: 22px;
   height: 22px;
   object-fit: contain;
 }
 
-.nav-streaming__link:hover,
-.nav-streaming__link:focus-visible {
+.nav-icon-link:hover,
+.nav-icon-link:focus-visible {
   transform: translateY(-2px);
   outline: none;
 }
 
-.nav-streaming__link--spotify:hover,
-.nav-streaming__link--spotify:focus-visible {
+.nav-icon-link--spotify:hover,
+.nav-icon-link--spotify:focus-visible {
   border-color: #1db954;
   box-shadow: 0 0 10px rgba(29, 185, 84, 0.35);
 }
 
-.nav-streaming__link--youtube:hover,
-.nav-streaming__link--youtube:focus-visible {
+.nav-icon-link--youtube-music:hover,
+.nav-icon-link--youtube-music:focus-visible,
+.nav-icon-link--youtube:hover,
+.nav-icon-link--youtube:focus-visible {
   border-color: #ff0000;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
 
-.nav-streaming__link--apple:hover,
-.nav-streaming__link--apple:focus-visible {
+.nav-icon-link--apple:hover,
+.nav-icon-link--apple:focus-visible {
   border-color: #fa243c;
   box-shadow: 0 0 10px rgba(250, 36, 60, 0.35);
+}
+
+.nav-icon-link--instagram:hover,
+.nav-icon-link--instagram:focus-visible {
+  border-color: #e4405f;
+  box-shadow: 0 0 10px rgba(228, 64, 95, 0.35);
+}
+
+.nav-icon-link--tiktok:hover,
+.nav-icon-link--tiktok:focus-visible {
+  border-color: #69c9d0;
+  box-shadow: 0 0 10px rgba(105, 201, 208, 0.35);
+}
+
+.nav-icon-link--reddit:hover,
+.nav-icon-link--reddit:focus-visible {
+  border-color: #ff4500;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.35);
+}
+
+.nav-icon-link--discord:hover,
+.nav-icon-link--discord:focus-visible {
+  border-color: #5865f2;
+  box-shadow: 0 0 10px rgba(88, 101, 242, 0.35);
 }
 
 /* Masthead — banner + logo vazado */
