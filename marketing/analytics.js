@@ -1,89 +1,103 @@
 /**
- * GeneWorld Analytics — camada única de marketing.
+ * GeneWorld Analytics — camada de abstração de marketing.
  *
- * Hoje: Meta Pixel
- * Futuro: GA4, TikTok Pixel, etc. — adicionar provedores sem tocar no HTML.
+ * O restante do projeto só chama:
+ *   Analytics.pageView()
+ *   Analytics.viewContent()
+ *   Analytics.track("SteamWishlistClick", { ... })
  *
- * Eventos atuais (somente ações confirmadas):
- *   PageView, ViewContent,
- *   SteamWishlistClick, SteamDemoClick,
- *   YouTubeClick, DiscordClick, InstagramClick, TikTokClick,
- *   SpotifyClick, RedditClick, MediaKitClick
+ * Provedores (Meta, GA4, TikTok, …) ficam em marketing/providers/.
+ * Nenhum arquivo fora de providers/ deve chamar fbq() / gtag() / ttq().
  */
 (function (window, document) {
   'use strict';
 
-  var PIXEL_ID = '2462649234147181';
-  var STEAM_APP_ID = '4717910';
-
-  var VIEW_CONTENT_PARAMS = {
-    content_name: 'Gene World',
-    content_ids: [STEAM_APP_ID],
-    content_type: 'product',
-    content_category: 'game',
-  };
-
-  /** @type {Array<{name: string, track: Function, trackCustom: Function}>} */
-  var providers = [];
-
-  var ready = false;
-
-  function ensureFbq() {
-    if (window.fbq) return;
-    /* eslint-disable */
-    !(function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = '2.0';
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-    /* eslint-enable */
-  }
-
-  function createMetaProvider() {
-    ensureFbq();
-    window.fbq('init', PIXEL_ID);
-
-    return {
-      name: 'meta',
-      track: function (eventName, params) {
-        if (typeof window.fbq !== 'function') return;
-        if (params) window.fbq('track', eventName, params);
-        else window.fbq('track', eventName);
-      },
-      trackCustom: function (eventName, params) {
-        if (typeof window.fbq !== 'function') return;
-        if (params) window.fbq('trackCustom', eventName, params);
-        else window.fbq('trackCustom', eventName);
-      },
+  if (typeof Object.assign !== 'function') {
+    Object.assign = function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var src = arguments[i];
+        if (!src) continue;
+        for (var key in src) {
+          if (Object.prototype.hasOwnProperty.call(src, key)) target[key] = src[key];
+        }
+      }
+      return target;
     };
   }
 
-  function dispatchStandard(eventName, params) {
-    for (var i = 0; i < providers.length; i++) {
-      providers[i].track(eventName, params);
-    }
+  var STEAM_APP_ID = '4717910';
+  var STORAGE_KEY = 'geneworld.lang';
+  var SUPPORTED_LANGS = { 'pt-BR': true, en: true, 'es-ES': true };
+
+  var STANDARD_EVENT_NAMES = {
+    PageView: true,
+    ViewContent: true,
+  };
+
+  /** @type {Array<{name: string, enabled?: boolean, init?: Function, track: Function}>} */
+  var providers = [];
+  var ready = false;
+
+  function normalizeLang(lang) {
+    if (!lang) return 'pt-BR';
+    var lower = String(lang).toLowerCase();
+    if (lower === 'pt' || lower === 'pt-br') return 'pt-BR';
+    if (lower === 'en' || lower === 'en-us' || lower === 'en-gb') return 'en';
+    if (lower === 'es' || lower === 'es-es') return 'es-ES';
+    if (SUPPORTED_LANGS[lang]) return lang;
+    return 'pt-BR';
   }
 
-  function dispatchCustom(eventName, params) {
-    for (var i = 0; i < providers.length; i++) {
-      providers[i].trackCustom(eventName, params);
+  function getLanguage() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('lang')) return normalizeLang(params.get('lang'));
+    } catch (err) {
+      /* ignore */
     }
+
+    try {
+      var stored = window.localStorage.getItem(STORAGE_KEY);
+      if (stored) return normalizeLang(stored);
+    } catch (err2) {
+      /* ignore */
+    }
+
+    if (document.documentElement && document.documentElement.lang) {
+      return normalizeLang(document.documentElement.lang);
+    }
+
+    return normalizeLang(navigator.language || 'pt-BR');
+  }
+
+  function getPageName() {
+    var path = (window.location.pathname || '/').toLowerCase();
+    if (path.indexOf('/mediakit') !== -1) return 'mediakit';
+    return 'home';
   }
 
   function isHomePage() {
-    var path = (window.location.pathname || '/').toLowerCase();
-    return path.indexOf('/mediakit') === -1;
+    return getPageName() === 'home';
+  }
+
+  function mergeParams(extra) {
+    var base = {
+      language: getLanguage(),
+      page: getPageName(),
+    };
+    if (!extra) return base;
+    return Object.assign({}, base, extra);
+  }
+
+  function dispatch(eventName, params) {
+    var payload = mergeParams(params);
+    for (var i = 0; i < providers.length; i++) {
+      var provider = providers[i];
+      if (provider.enabled === false) continue;
+      if (typeof provider.track === 'function') {
+        provider.track(eventName, payload);
+      }
+    }
   }
 
   function hostnameOf(href) {
@@ -102,9 +116,13 @@
     }
   }
 
+  function classListContains(el, token) {
+    if (!el || !el.classList) return false;
+    return el.classList.contains(token);
+  }
+
   /**
-   * Infere o evento a partir do destino do link (sem data-gw-event).
-   * Só retorna eventos de ação confirmada (clique).
+   * Infere evento pelo destino / classes. Só ações confirmadas (clique).
    */
   function inferEventFromAnchor(anchor) {
     var href = anchor.getAttribute('href');
@@ -118,13 +136,31 @@
     }
 
     if (
+      classListContains(anchor, 'nav-icon-link--youtube-music') ||
+      classListContains(anchor, 'discography-link--youtube') ||
+      host === 'music.youtube.com' ||
+      ((host === 'youtube.com' || host === 'www.youtube.com' || host === 'm.youtube.com') &&
+        path.indexOf('/playlist') === 0)
+    ) {
+      return 'YouTubeMusicClick';
+    }
+
+    if (
       host === 'youtube.com' ||
       host === 'www.youtube.com' ||
       host === 'm.youtube.com' ||
-      host === 'youtu.be' ||
-      host === 'music.youtube.com'
+      host === 'youtu.be'
     ) {
       return 'YouTubeClick';
+    }
+
+    if (
+      classListContains(anchor, 'nav-icon-link--apple') ||
+      classListContains(anchor, 'discography-link--apple') ||
+      host === 'music.apple.com' ||
+      host === 'itunes.apple.com'
+    ) {
+      return 'AppleMusicClick';
     }
 
     if (host === 'discord.gg' || host === 'www.discord.gg' || host === 'discord.com' || host === 'www.discord.com') {
@@ -162,89 +198,71 @@
 
     var eventName = resolveEventName(anchor);
     if (!eventName) return;
+    if (STANDARD_EVENT_NAMES[eventName]) return;
 
-    // PageView / ViewContent não são disparados por clique.
-    if (eventName === 'PageView' || eventName === 'ViewContent') return;
-
-    GeneWorldAnalytics.trackCustom(eventName);
+    Analytics.track(eventName);
   }
 
   function bindClickTracking() {
     document.addEventListener('click', onDocumentClick, true);
   }
 
-  var GeneWorldAnalytics = {
+  function registerBuiltInProviders() {
+    var registry = window.GeneWorldProviders || {};
+    var names = ['meta', 'google', 'tiktok'];
+    for (var i = 0; i < names.length; i++) {
+      var provider = registry[names[i]];
+      if (provider && provider.enabled !== false && typeof provider.track === 'function') {
+        if (typeof provider.init === 'function') provider.init();
+        providers.push(provider);
+      }
+    }
+  }
+
+  var Analytics = {
     /**
-     * Registra um provedor adicional (GA4, TikTok, …) no futuro.
-     * Espera { name, track(standardEvent, params), trackCustom(name, params) }.
+     * Registra provedor adicional em runtime.
+     * Espera { name, track(eventName, params), init?, enabled? }.
      */
     registerProvider: function (provider) {
-      if (!provider || typeof provider.track !== 'function' || typeof provider.trackCustom !== 'function') {
-        return;
-      }
+      if (!provider || typeof provider.track !== 'function') return;
+      if (provider.enabled === false) return;
+      if (typeof provider.init === 'function') provider.init();
       providers.push(provider);
     },
 
+    getLanguage: getLanguage,
+    getPage: getPageName,
+
+    /**
+     * Dispara qualquer evento (padrão ou custom) para todos os provedores ativos.
+     * Sempre inclui language e page; params extras são mesclados.
+     */
     track: function (eventName, params) {
-      dispatchStandard(eventName, params);
+      if (!eventName) return;
+      dispatch(eventName, params);
     },
 
-    trackCustom: function (eventName, params) {
-      dispatchCustom(eventName, params);
-    },
-
-    pageView: function () {
-      dispatchStandard('PageView');
+    pageView: function (params) {
+      dispatch('PageView', params);
     },
 
     viewContent: function (params) {
-      dispatchStandard('ViewContent', params || VIEW_CONTENT_PARAMS);
+      var defaults = {
+        content_name: 'Gene World',
+        content_ids: [STEAM_APP_ID],
+        content_type: 'product',
+        content_category: 'game',
+      };
+      dispatch('ViewContent', Object.assign({}, defaults, params || {}));
     },
-
-    steamWishlistClick: function () {
-      dispatchCustom('SteamWishlistClick');
-    },
-
-    steamDemoClick: function () {
-      dispatchCustom('SteamDemoClick');
-    },
-
-    youtubeClick: function () {
-      dispatchCustom('YouTubeClick');
-    },
-
-    discordClick: function () {
-      dispatchCustom('DiscordClick');
-    },
-
-    instagramClick: function () {
-      dispatchCustom('InstagramClick');
-    },
-
-    tiktokClick: function () {
-      dispatchCustom('TikTokClick');
-    },
-
-    spotifyClick: function () {
-      dispatchCustom('SpotifyClick');
-    },
-
-    redditClick: function () {
-      dispatchCustom('RedditClick');
-    },
-
-    mediaKitClick: function () {
-      dispatchCustom('MediaKitClick');
-    },
-
-    /** @private — preparado; só usar com player próprio no futuro. */
-    // trailerPlay / gameplayPlay intencionalmente ausentes nesta versão.
 
     init: function () {
       if (ready) return;
       ready = true;
 
-      providers.push(createMetaProvider());
+      registerBuiltInProviders();
+
       this.pageView();
 
       if (isHomePage()) {
@@ -259,6 +277,7 @@
     },
   };
 
-  window.GeneWorldAnalytics = GeneWorldAnalytics;
-  GeneWorldAnalytics.init();
+  window.Analytics = Analytics;
+  window.GeneWorldAnalytics = Analytics;
+  Analytics.init();
 })(window, document);
