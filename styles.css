@@ -590,12 +590,6 @@ body {
   padding: 1rem 1.25rem;
 }
 
-.btn--demo {
-  box-shadow:
-    0 0 0 1px rgba(102, 192, 244, 0.45),
-    0 0 18px rgba(102, 192, 244, 0.35);
-}
-
 .btn--steam-ghost {
   border-color: rgba(102, 192, 244, 0.55);
   color: #c7d5e0;

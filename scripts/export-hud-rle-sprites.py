@@ -14,6 +14,7 @@ SPRITES_INSTRUMENTS = (
     ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "itens" / "instruments"
 )
 SPRITES_HUD = ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "otherworldsdecoration"
+SPRITES_SKILLS = ROOT / "src" / "main" / "java" / "org" / "gene" / "world" / "sprites" / "skills"
 OUT = ROOT / "geneworld-site" / "spritepngoutput"
 
 PALETTE = {
@@ -133,6 +134,15 @@ def main() -> None:
     ]
     for java_file, frame_index, out_name in instrument_exports:
         export_frame(SPRITES_INSTRUMENTS / java_file, frame_index, out_name)
+
+    for class_name in (
+        "SwordTier1SkillSprite",
+        "SwordTier2SkillSprite",
+        "SwordTier3SkillSprite",
+        "SwordTierASkillSprite",
+        "SwordTierBSkillSprite",
+    ):
+        export_frame(SPRITES_SKILLS / f"{class_name}.java", 1, f"{class_name}.png")
 
 
 if __name__ == "__main__":
